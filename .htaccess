@@ -1,0 +1,41 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Đảm bảo phục vụ file tĩnh đúng cách
+<IfModule mod_mime.c>
+    AddType image/jpeg .jpg .jpeg .JPG .JPEG
+    AddType image/png .png .PNG
+    AddType image/gif .gif .GIF
+    AddType image/webp .webp .WEBP
+    AddType image/svg+xml .svg .SVG
+    AddType audio/mpeg .mp3 .MP3
+    AddType text/css .css
+    AddType application/javascript .js
+</IfModule>
+
+# Enable CORS cho font và image từ subdomain
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|JPG|JPEG|PNG|GIF|WEBP|SVG|woff|woff2|ttf|otf|eot)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# Cache control cho performance
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Redirect to index.html if no file specified
+DirectoryIndex index.html
+
+# Handle 404 errors
+ErrorDocument 404 /index.html
