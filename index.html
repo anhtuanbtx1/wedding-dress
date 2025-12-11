@@ -995,153 +995,617 @@
     class="mau-thiep-template mau-thiep-template-templates mau-thiep-template-korea mau-thiep-template-templateskorea-php single single-mau-thiep postid-154 no-sidebar">
 
     <!-- HEADER -->
-    <!-- WELCOME POPUP & INTERACTION UNLOCKER -->
+    <!-- WEDDING INVITATION POPUP - ENVELOPE DESIGN -->
     <style>
-        .welcome-overlay {
+        .wedding-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
             z-index: 99999;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.6s ease;
-            backdrop-filter: blur(5px);
+            transition: opacity 1s ease;
         }
 
-        .welcome-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 90%;
-            width: 380px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .invitation-container {
+            position: relative;
+            width: 90%;
+            max-width: 460px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 50px 40px;
+            animation: fadeInScale 0.8s ease-out;
         }
 
-        .welcome-title {
+        .flower-left {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('wp-content/pic/hoa.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.9;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .flower-right {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 140px;
+            height: 140px;
+            background-image: url('wp-content/pic/hoa1.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.9;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .invitation-title {
             font-family: 'Dancing Script', cursive;
-            /* Font chữ đám cưới */
-            font-size: 32px;
+            font-size: 42px;
             color: #333;
-            margin-bottom: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
         }
 
-        .welcome-text {
+        .invitation-hint {
+            text-align: center;
+            font-size: 14px;
             color: #666;
             margin-bottom: 30px;
-            font-size: 16px;
-            line-height: 1.5;
+            font-style: italic;
         }
 
-        .btn-open-card {
-            background: linear-gradient(45deg, #d4a373, #b07d4b);
-            color: white;
-            border: none;
-            padding: 12px 35px;
-            border-radius: 50px;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-flex;
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #d4c4a8 0%, #c9b99a 50%, #d4c4a8 100%);
+            border-radius: 8px;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .btn-open-card:active {
-            transform: scale(0.95);
+        .envelope:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-open-card i {
-            font-size: 20px;
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #bead8e 0%, #a89878 100%);
+            clip-path: polygon(0 0, 50% 80%, 100% 0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
-        @keyframes popIn {
+        .wax-seal-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .envelope:hover .wax-seal-wrapper {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .wax-seal {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+            animation: sealPulse 2.5s ease-in-out infinite;
+        }
+
+        .wax-seal-wrapper.breaking .wax-seal {
+            animation: crackSeal 0.7s ease-out forwards;
+        }
+
+        .invitation-text {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .guest-name {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #d4a373;
+        }
+
+        /* Inner card with couple photo */
+        .inner-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 85%;
+            max-width: 350px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10;
+        }
+
+        .inner-card.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .couple-photo {
+            width: 100%;
+            height: 380px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .couple-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .love-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #d4a373;
+            text-align: center;
+        }
+
+        @keyframes fadeInScale {
             from {
-                transform: scale(0.8);
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
             }
 
             to {
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes sealPulse {
+
+            0%,
+            100% {
                 transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        @keyframes crackSeal {
+            0% {
+                transform: scale(1) rotate(0deg);
                 opacity: 1;
+            }
+
+            30% {
+                transform: scale(1.3) rotate(8deg);
+            }
+
+            100% {
+                transform: scale(0) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invitation-container {
+                padding: 40px 30px;
+            }
+
+            .invitation-title {
+                font-size: 32px;
+            }
+
+            .envelope {
+                height: 240px;
+            }
+
+            .wax-seal-wrapper {
+                width: 90px;
+                height: 90px;
+            }
+
+            .flower-left,
+            .flower-right {
+                width: 80px;
+                height: 80px;
+            }
+
+            .couple-photo {
+                height: 300px;
             }
         }
     </style>
 
-    <div id="welcome-overlay" class="welcome-overlay">
-        <div class="welcome-box">
-            <h2 class="welcome-title">Welcome to our Wedding</h2>
-            <p class="welcome-text">Mời bạn mở thiệp để cùng chung vui ngày trọng đại của chúng mình nhé! ❤️</p>
-            <button id="btn-open-card" class="btn-open-card">
-                <i class="ri-mail-open-line"></i> Mở Thiệp
-            </button>
+
+
+
+    <!-- WEDDING INVITATION POPUP - ENVELOPE DESIGN -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .wedding-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+
+        .invitation-container {
+            position: relative;
+            width: 90%;
+            max-width: 460px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 50px 40px;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        .flower-left {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 120px;
+            height: 120px;
+            background-image: url('wp-content/pic/hoa.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.9;
+        }
+
+        .flower-right {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 140px;
+            height: 140px;
+            background-image: url('wp-content/pic/hoa1.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.9;
+        }
+
+        .invitation-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 42px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .invitation-hint {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #d4c4a8 0%, #c9b99a 50%, #d4c4a8 100%);
+            border-radius: 8px;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #bead8e 0%, #a89878 100%);
+            clip-path: polygon(0 0, 50% 80%, 100% 0);
+        }
+
+        .wax-seal-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .envelope:hover .wax-seal-wrapper {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .wax-seal {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .wax-seal-wrapper.breaking .wax-seal {
+            animation: crack 0.7s ease-out forwards;
+        }
+
+        .invitation-text {
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .guest-name {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #333;
+        }
+
+        .inner-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 85%;
+            max-width: 350px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10;
+        }
+
+        .inner-card.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .couple-photo {
+            width: 100%;
+            height: 380px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .couple-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .love-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #d4a373;
+            text-align: center;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        @keyframes crack {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            30% {
+                transform: scale(1.3) rotate(8deg);
+            }
+
+            100% {
+                transform: scale(0) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invitation-container {
+                padding: 40px 30px;
+            }
+
+            .invitation-title {
+                font-size: 32px;
+            }
+
+            .envelope {
+                height: 240px;
+            }
+
+            .wax-seal-wrapper {
+                width: 90px;
+                height: 90px;
+            }
+
+            .flower-left,
+            .flower-right {
+                width: 80px;
+                height: 80px;
+            }
+
+            .couple-photo {
+                height: 300px;
+            }
+        }
+    </style>
+
+    <div id="wedding-overlay" class="wedding-overlay">
+        <div class="invitation-container">
+            <div class="flower-left"></div>
+            <div class="flower-right"></div>
+
+            <h1 class="invitation-title">Wedding Invitation</h1>
+            <p class="invitation-hint">Chạm để mở thiệp</p>
+
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="wax-seal-wrapper" id="wax-seal">
+                    <img src="wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal">
+                </div>
+            </div>
+
+            <p class="invitation-text">TRÂN TRỌNG KÍNH MỜI</p>
+            <p class="guest-name">ĐẾN DỰ TIỆC CHUNG VUI CÙNG CHÚNG TÔI</p>
+            <div class="inner-card" id="inner-card">
+                <div class="couple-photo">
+                    <img src="wp-content/pic/damcuoi.jpg" alt="Couple Photo">
+                </div>
+                <div class="love-message">Together Forever ❤️</div>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const overlay = document.getElementById('welcome-overlay');
-            const btn = document.getElementById('btn-open-card');
+            const overlay = document.getElementById('wedding-overlay');
+            const envelope = document.getElementById('envelope');
+            const waxSeal = document.getElementById('wax-seal');
+            const innerCard = document.getElementById('inner-card');
 
-            // Khóa cuộn trang khi chưa mở thiệp
             document.body.style.overflow = 'hidden';
 
-            btn.addEventListener('click', () => {
-                console.log('🎯 [POPUP] Nút "Mở Thiệp" được bấm');
+            envelope.addEventListener('click', () => {
+                console.log('🎯 [ENVELOPE] Opening...');
 
-                // 1. PLAY MUSIC (Chắc chắn 100% thành công vì user click)
+                // Vỡ con dấu
+                waxSeal.classList.add('breaking');
+
+                // Sau 0.7s hiện ảnh
+                setTimeout(() => {
+                    innerCard.classList.add('show');
+                }, 700);
+
+                // PLAY MUSIC
                 const audio = document.getElementById('audio');
                 if (audio) {
                     audio.volume = 1.0;
                     audio.muted = false;
                     audio.play().then(() => {
-                        console.log('✅ [MUSIC] Nhạc đã phát thành công');
-                    }).catch(e => console.log('⚠️ [MUSIC] Lỗi:', e.message));
-                } else {
-                    console.log('❌ [MUSIC] Không tìm thấy audio element');
+                        console.log('✅ [MUSIC] Playing');
+                    }).catch(e => console.log('⚠️ [MUSIC] Error:', e.message));
                 }
 
-                // 2. START AUTO SCROLL (với retry cho mobile)
-                console.log('🔍 [SCROLL] Kiểm tra window.autoScroll:', !!window.autoScroll);
-
+                // START AUTO SCROLL
                 function tryStartAutoScroll(retries = 5) {
                     if (window.autoScroll && window.autoScroll.start) {
-                        console.log('✅ [SCROLL] Bắt đầu auto scroll...');
-                        window.scrollTo(0, 0); // Reset về đầu
+                        console.log('✅ [SCROLL] Starting...');
+                        window.scrollTo(0, 0);
                         setTimeout(() => {
                             window.autoScroll.start();
-                            console.log('▶️ [SCROLL] Auto scroll đã được kích hoạt');
                         }, 500);
                     } else if (retries > 0) {
-                        console.log(`⏳ [SCROLL] Chưa sẵn sàng, thử lại (${retries} lần còn lại)...`);
                         setTimeout(() => tryStartAutoScroll(retries - 1), 200);
-                    } else {
-                        console.log('❌ [SCROLL] Không thể khởi động auto scroll sau nhiều lần thử');
                     }
                 }
 
-                tryStartAutoScroll();
-
-                // 3. ẨN POPUP
-                overlay.style.opacity = '0';
-                document.body.style.overflow = 'auto'; // Cho phép cuộn lại
-
+                // Ẩn popup sau 3s
                 setTimeout(() => {
-                    overlay.remove();
-                    console.log('✅ [POPUP] Đã xóa popup');
-                }, 600);
+                    overlay.style.opacity = '0';
+                    document.body.style.overflow = 'auto';
+
+                    setTimeout(() => {
+                        overlay.remove();
+                        tryStartAutoScroll();
+                        console.log('✅ [ENVELOPE] Closed');
+                    }, 1000);
+                }, 3000);
             });
         });
     </script>
-    </script>
-    <!-- END WELCOME POPUP -->
+    <!-- END WEDDING INVITATION POPUP -->
+
 
     <header>
         <section id="banner" class="bg_overlay">
@@ -2443,7 +2907,9 @@
                 }
             }
 
-            // Xử lý nút bật/tắt
+
+
+            // Xử lý nút bật/tắt (sử dụng toggleBtn đã khai báo ở trên)
             if (toggleBtn) {
                 toggleBtn.addEventListener('click', () => {
                     isHeartsEnabled = !isHeartsEnabled;
@@ -2454,30 +2920,19 @@
                     } else {
                         toggleBtn.classList.add('disabled');
                         stopHearts();
-                        // Xóa tất cả trái tim hiện tại
                         container.innerHTML = '';
                         heartsCount = 0;
                     }
                 });
             }
 
-            // Bắt đầu hiệu ứng khi modal welcome đóng
-            const originalStartBtn = document.getElementById('startButton');
-            if (originalStartBtn) {
-                originalStartBtn.addEventListener('click', () => {
-                    // Chờ một chút rồi bắt đầu hiệu ứng
-                    setTimeout(() => {
-                        startHearts();
-                    }, 500);
-                });
-            } else {
-                // Nếu không có modal, bắt đầu luôn
-                setTimeout(() => {
-                    startHearts();
-                }, 1000);
-            }
+            // Auto start hearts
+            setTimeout(() => {
+                startHearts();
+            }, 1000);
         })();
     </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
         id="fancybox js-js">
@@ -2539,144 +2994,123 @@
         }, 2000); // Chờ 2 giây sau khi trang load
     </script>
 
-    <!-- AUTO SCROLL INLINE (for mobile compatibility) -->
-    <script>
-        // Đợi một chút rồi chạy
-        setTimeout(function () {
-            console.log('Starting countdown after delay...');
-            runCountdown();
-            window.mainCountdownTimer = setInterval(runCountdown, 1000);
-        }, 100);
-        }) ();
 
-        // Hiệu ứng trái tim rơi như tuyết
-        (function () {
-            let heartsInterval;
-            let isHeartsEnabled = true;
-            let heartsCount = 0;
-            const maxHearts = 30; // Giới hạn số lượng trái tim tối đa
-            const container = document.getElementById('hearts-container');
-            const toggleBtn = document.getElementById('toggleHearts');
 
-            // Các loại kích thước
-            const sizes = ['small', 'medium', 'large'];
+    // Hiệu ứng trái tim rơi như tuyết
+    (function () {
+    let heartsInterval;
+    let isHeartsEnabled = true;
+    let heartsCount = 0;
+    const maxHearts = 30; // Giới hạn số lượng trái tim tối đa
+    const container = document.getElementById('hearts-container');
+    const toggleBtn = document.getElementById('toggleHearts');
 
-            // Các loại màu sắc
-            const colors = ['pink', 'red', 'gold', 'rose'];
+    // Các loại kích thước
+    const sizes = ['small', 'medium', 'large'];
 
-            // Các loại animation
-            const animations = ['', 'sway', 'sparkle'];
+    // Các loại màu sắc
+    const colors = ['pink', 'red', 'gold', 'rose'];
 
-            // Hàm tạo trái tim
-            function createHeart() {
-                if (!isHeartsEnabled || heartsCount >= maxHearts) return;
+    // Các loại animation
+    const animations = ['', 'sway', 'sparkle'];
 
-                const heart = document.createElement('div');
-                heart.className = 'heart';
+    // Hàm tạo trái tim
+    function createHeart() {
+    if (!isHeartsEnabled || heartsCount >= maxHearts) return;
 
-                // Random kích thước
-                const size = sizes[Math.floor(Math.random() * sizes.length)];
-                heart.classList.add(`heart - ${size} `);
+    const heart = document.createElement('div');
+    heart.className = 'heart';
 
-                // Random màu sắc
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                heart.classList.add(`heart - ${color} `);
+    // Random kích thước
+    const size = sizes[Math.floor(Math.random() * sizes.length)];
+    heart.classList.add(`heart-${size}`);
 
-                // Random animation (50% chance cho mỗi loại)
-                if (Math.random() > 0.5) {
-                    const animation = animations[Math.floor(Math.random() * animations.length)];
-                    if (animation) heart.classList.add(`heart - ${animation} `);
-                }
+    // Random màu sắc
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    heart.classList.add(`heart-${color}`);
 
-                // Random vị trí nằm ngang
-                const leftPosition = Math.random() * 100;
-                heart.style.left = `${leftPosition}% `;
+    // Random animation (50% chance cho mỗi loại)
+    if (Math.random() > 0.5) {
+    const animation = animations[Math.floor(Math.random() * animations.length)];
+    if (animation) heart.classList.add(`heart-${animation}`);
+    }
 
-                // Random thời gian rơi (từ 5-15 giây)
-                const duration = Math.random() * 10 + 5;
-                heart.style.animationDuration = `${duration} s`;
+    // Random vị trí nằm ngang
+    const leftPosition = Math.random() * 100;
+    heart.style.left = `${leftPosition}%`;
 
-                // Nếu có animation dao động, set thời gian dao động
-                if (heart.classList.contains('heart-sway')) {
-                    const swayDuration = Math.random() * 2 + 3;
-                    heart.style.animationDuration = `${duration} s, ${swayDuration} s`;
-                }
+    // Random thời gian rơi (từ 5-15 giây)
+    const duration = Math.random() * 10 + 5;
+    heart.style.animationDuration = `${duration} s`;
 
-                // Random độ trễ animation
-                const delay = Math.random() * 2;
-                heart.style.animationDelay = `${delay} s`;
+    // Nếu có animation dao động, set thời gian dao động
+    if (heart.classList.contains('heart-sway')) {
+    const swayDuration = Math.random() * 2 + 3;
+    heart.style.animationDuration = `${duration} s, ${swayDuration} s`;
+    }
 
-                // Thêm vào container
-                container.appendChild(heart);
-                heartsCount++;
+    // Random độ trễ animation
+    const delay = Math.random() * 2;
+    heart.style.animationDelay = `${delay} s`;
 
-                // Tự động xóa sau khi animation kết thúc
-                setTimeout(() => {
-                    heart.remove();
-                    heartsCount--;
-                }, (duration + delay) * 1000);
-            }
+    // Thêm vào container
+    container.appendChild(heart);
+    heartsCount++;
 
-            // Bắt đầu hiệu ứng
-            function startHearts() {
-                if (heartsInterval) return;
+    // Tự động xóa sau khi animation kết thúc
+    setTimeout(() => {
+    heart.remove();
+    heartsCount--;
+    }, (duration + delay) * 1000);
+    }
 
-                // Tạo trái tim đầu tiên ngay lập tức
-                createHeart();
+    // Bắt đầu hiệu ứng
+    function startHearts() {
+    if (heartsInterval) return;
 
-                // Tiếp tục tạo trái tim mới mỗi 300-800ms
-                heartsInterval = setInterval(() => {
-                    createHeart();
-                }, Math.random() * 500 + 300);
-            }
+    // Tạo trái tim đầu tiên ngay lập tức
+    createHeart();
 
-            // Dừng hiệu ứng
-            function stopHearts() {
-                if (heartsInterval) {
-                    clearInterval(heartsInterval);
-                    heartsInterval = null;
-                }
-            }
+    // Tiếp tục tạo trái tim mới mỗi 300-800ms
+    heartsInterval = setInterval(() => {
+    createHeart();
+    }, Math.random() * 500 + 300);
+    }
 
-            // Xử lý nút bật/tắt
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', () => {
-                    isHeartsEnabled = !isHeartsEnabled;
+    // Dừng hiệu ứng
+    function stopHearts() {
+    if (heartsInterval) {
+    clearInterval(heartsInterval);
+    heartsInterval = null;
+    }
+    }
 
-                    if (isHeartsEnabled) {
-                        toggleBtn.classList.remove('disabled');
-                        startHearts();
-                    } else {
-                        toggleBtn.classList.add('disabled');
-                        stopHearts();
-                        // Xóa tất cả trái tim hiện tại
-                        container.innerHTML = '';
-                        heartsCount = 0;
-                    }
-                });
-            }
+    // Xử lý nút bật/tắt
+    if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+    isHeartsEnabled = !isHeartsEnabled;
 
-            // Bắt đầu hiệu ứng khi modal welcome đóng
-            const originalStartBtn = document.getElementById('startButton');
-            if (originalStartBtn) {
-                originalStartBtn.addEventListener('click', () => {
-                    // Chờ một chút rồi bắt đầu hiệu ứng
-                    setTimeout(() => {
-                        startHearts();
-                    }, 500);
-                });
-            } else {
-                // Nếu không có modal, bắt đầu luôn
-                setTimeout(() => {
-                    startHearts();
-                }, 1000);
-            }
-        })();
+    if (isHeartsEnabled) {
+    toggleBtn.classList.remove('disabled');
+    startHearts();
+    } else {
+    toggleBtn.classList.add('disabled');
+    stopHearts();
+    container.innerHTML = '';
+    heartsCount = 0;
+    }
+    });
+    }
+
+    // Auto start
+    setTimeout(() => {
+    startHearts();
+    }, 1000);
+    })();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
-        id="fancybox js-js">
-        </script>
+        id="fancybox js-js"></script>
     <script src="wp-content/themes/js/uikit.min8a54.js" id="uikit js-js">
     </script>
     <script src="wp-content/themes/js/uikit-icons.min8a54.js" id="uikit icon-js">
@@ -2834,39 +3268,47 @@
                 init();
             }
 
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', () => {
-                    isHeartsEnabled = !isHeartsEnabled;
-
-                    if (isHeartsEnabled) {
-                        toggleBtn.classList.remove('disabled');
-                        startHearts();
-                    } else {
-                        toggleBtn.classList.add('disabled');
-                        stopHearts();
-                        // Xóa tất cả trái tim hiện tại
-                        container.innerHTML = '';
-                        heartsCount = 0;
-                    }
-                });
-            }
-
-            // Bắt đầu hiệu ứng khi modal welcome đóng
-            const originalStartBtn = document.getElementById('startButton');
-            if (originalStartBtn) {
-                originalStartBtn.addEventListener('click', () => {
-                    // Chờ một chút rồi bắt đầu hiệu ứng
-                    setTimeout(() => {
-                        startHearts();
-                    }, 500);
-                });
-            } else {
-                // Nếu không có modal, bắt đầu luôn
-                setTimeout(() => {
-                    startHearts();
-                }, 1000);
-            }
+            // Export
+            window.autoScroll = { start: startScroll, stop: stopScroll };
+            console.log('✅ Auto scroll exported');
         })();
+    </script>
+
+
+
+
+
+
+
+
+    toggleBtn.classList.remove('disabled');
+    startHearts();
+    } else {
+    toggleBtn.classList.add('disabled');
+    stopHearts();
+    // Xóa tất cả trái tim hiện tại
+    container.innerHTML = '';
+    heartsCount = 0;
+    }
+    });
+    }
+
+    // Bắt đầu hiệu ứng khi modal welcome đóng
+    const originalStartBtn = document.getElementById('startButton');
+    if (originalStartBtn) {
+    originalStartBtn.addEventListener('click', () => {
+    // Chờ một chút rồi bắt đầu hiệu ứng
+    setTimeout(() => {
+    startHearts();
+    }, 500);
+    });
+    } else {
+    // Nếu không có modal, bắt đầu luôn
+    setTimeout(() => {
+    startHearts();
+    }, 1000);
+    }
+    })();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
