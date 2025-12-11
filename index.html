@@ -995,281 +995,8 @@
     class="mau-thiep-template mau-thiep-template-templates mau-thiep-template-korea mau-thiep-template-templateskorea-php single single-mau-thiep postid-154 no-sidebar">
 
     <!-- HEADER -->
-    <!-- WEDDING INVITATION POPUP - ENVELOPE DESIGN -->
-    <style>
-        .wedding-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
-            z-index: 99999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s ease;
-        }
 
-        .invitation-container {
-            position: relative;
-            width: 90%;
-            max-width: 460px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            padding: 50px 40px;
-            animation: fadeInScale 0.8s ease-out;
-        }
-
-        .flower-left {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 120px;
-            height: 120px;
-            background-image: url('wp-content/pic/hoa.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.9;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-
-        .flower-right {
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 140px;
-            height: 140px;
-            background-image: url('wp-content/pic/hoa1.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.9;
-            animation: fadeIn 1s ease-out 0.5s both;
-        }
-
-        .invitation-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 42px;
-            color: #333;
-            text-align: center;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .invitation-hint {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .envelope {
-            position: relative;
-            width: 100%;
-            height: 280px;
-            background: linear-gradient(135deg, #d4c4a8 0%, #c9b99a 50%, #d4c4a8 100%);
-            border-radius: 8px;
-            box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.2),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .envelope:hover {
-            transform: translateY(-5px);
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.25),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(135deg, #bead8e 0%, #a89878 100%);
-            clip-path: polygon(0 0, 50% 80%, 100% 0);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .wax-seal-wrapper {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            z-index: 2;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .envelope:hover .wax-seal-wrapper {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .wax-seal {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
-            animation: sealPulse 2.5s ease-in-out infinite;
-        }
-
-        .wax-seal-wrapper.breaking .wax-seal {
-            animation: crackSeal 0.7s ease-out forwards;
-        }
-
-        .invitation-text {
-            text-align: center;
-            font-size: 18px;
-            color: #333;
-            letter-spacing: 3px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .guest-name {
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-            font-size: 32px;
-            color: #d4a373;
-        }
-
-        /* Inner card with couple photo */
-        .inner-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 85%;
-            max-width: 350px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            opacity: 0;
-            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 10;
-        }
-
-        .inner-card.show {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .couple-photo {
-            width: 100%;
-            height: 380px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .couple-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .love-message {
-            font-family: 'Dancing Script', cursive;
-            font-size: 28px;
-            color: #d4a373;
-            text-align: center;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 0.9;
-            }
-        }
-
-        @keyframes sealPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.08);
-            }
-        }
-
-        @keyframes crackSeal {
-            0% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-
-            30% {
-                transform: scale(1.3) rotate(8deg);
-            }
-
-            100% {
-                transform: scale(0) rotate(180deg);
-                opacity: 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .invitation-container {
-                padding: 40px 30px;
-            }
-
-            .invitation-title {
-                font-size: 32px;
-            }
-
-            .envelope {
-                height: 240px;
-            }
-
-            .wax-seal-wrapper {
-                width: 90px;
-                height: 90px;
-            }
-
-            .flower-left,
-            .flower-right {
-                width: 80px;
-                height: 80px;
-            }
-
-            .couple-photo {
-                height: 300px;
-            }
-        }
-    </style>
-
-
-
-
-    <!-- WEDDING INVITATION POPUP - ENVELOPE DESIGN -->
+    <!-- WEDDING INVITATION POPUP - ENVELOPE WITH PHOTO RISING -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .wedding-overlay {
@@ -1297,15 +1024,39 @@
             animation: fadeInScale 0.8s ease-out;
         }
 
+        .invitation-container-box {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 50px 40px;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
         .flower-left {
             position: absolute;
-            top: -20px;
-            left: -20px;
+            top: 60px;
+            left: -25px;
             width: 120px;
             height: 120px;
             background-image: url('wp-content/pic/hoa.png');
             background-size: contain;
             background-repeat: no-repeat;
+            opacity: 0.9;
+        }
+
+        .flower-left-top {
+            position: absolute;
+            top: 100px;
+            left: -5px;
+            width: 120px;
+            height: 120px;
+            background-image: url('wp-content/pic/hoa.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: rotate(45deg) scale(1, 1);
             opacity: 0.9;
         }
 
@@ -1350,10 +1101,11 @@
                 inset 0 -2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            overflow: visible;
         }
 
         .envelope:hover {
@@ -1368,18 +1120,55 @@
             height: 50%;
             background: linear-gradient(135deg, #bead8e 0%, #a89878 100%);
             clip-path: polygon(0 0, 50% 80%, 100% 0);
+            transform-origin: top center;
+            transition: transform 0.8s ease;
+            z-index: 3;
+        }
+
+        .envelope.opening .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+
+        /* Ảnh cặp đôi trong phong bì */
+        .envelope-photo {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            width: 85%;
+            max-width: 280px;
+            height: 0;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 5;
+        }
+
+        .envelope.opening .envelope-photo {
+            height: 240px;
+            transform: translateX(-50%) translateY(-120px);
+        }
+
+        .envelope-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .wax-seal-wrapper {
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 110px;
             height: 110px;
-            z-index: 2;
+            z-index: 4;
             transition: all 0.4s ease;
         }
 
         .envelope:hover .wax-seal-wrapper {
-            transform: scale(1.15) rotate(5deg);
+            transform: translate(-50%, -50%) scale(1.15) rotate(5deg);
         }
 
         .wax-seal {
@@ -1407,48 +1196,6 @@
             font-family: 'Dancing Script', cursive;
             font-size: 32px;
             color: #333;
-        }
-
-        .inner-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 85%;
-            max-width: 350px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            opacity: 0;
-            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 10;
-        }
-
-        .inner-card.show {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .couple-photo {
-            width: 100%;
-            height: 380px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .couple-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .love-message {
-            font-family: 'Dancing Script', cursive;
-            font-size: 28px;
-            color: #d4a373;
-            text-align: center;
         }
 
         @keyframes fadeInScale {
@@ -1515,8 +1262,59 @@
                 height: 80px;
             }
 
-            .couple-photo {
-                height: 300px;
+            .envelope.opening .envelope-photo {
+                height: 240px;
+                transform: translateX(-50%) translateY(-100px);
+            }
+        }
+
+        /* Invitation Cards Layout */
+        #countdown-section .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .invitation {
+            flex: 1 1 45%;
+            max-width: 500px;
+            margin: 10px;
+        }
+
+        /* Wrapper for 2 cards */
+        .invitation:first-of-type {
+            display: inline-flex;
+        }
+
+        @media (max-width: 768px) {
+            .invitation {
+                flex: 1 1 100%;
+                max-width: 100%;
+                margin: 20px 0;
+            }
+        }
+
+        /* Animation lắc lư cho ảnh mylove */
+        @keyframes swing {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            20% {
+                transform: rotate(15deg);
+            }
+
+            40% {
+                transform: rotate(-10deg);
+            }
+
+            60% {
+                transform: rotate(5deg);
+            }
+
+            80% {
+                transform: rotate(-5deg);
             }
         }
     </style>
@@ -1524,6 +1322,7 @@
     <div id="wedding-overlay" class="wedding-overlay">
         <div class="invitation-container">
             <div class="flower-left"></div>
+            <div class="flower-left-top"></div>
             <div class="flower-right"></div>
 
             <h1 class="invitation-title">Wedding Invitation</h1>
@@ -1534,16 +1333,14 @@
                 <div class="wax-seal-wrapper" id="wax-seal">
                     <img src="wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal">
                 </div>
+                <!-- Ảnh trong phong bì -->
+                <div class="envelope-photo">
+                    <img src="wp-content/pic/damcuoi.jpg" alt="Couple Photo">
+                </div>
             </div>
 
             <p class="invitation-text">TRÂN TRỌNG KÍNH MỜI</p>
-            <p class="guest-name">ĐẾN DỰ TIỆC CHUNG VUI CÙNG CHÚNG TÔI</p>
-            <div class="inner-card" id="inner-card">
-                <div class="couple-photo">
-                    <img src="wp-content/pic/damcuoi.jpg" alt="Couple Photo">
-                </div>
-                <div class="love-message">Together Forever ❤️</div>
-            </div>
+            <p class="guest-name">ĐẾN DỰ TIỆC CHUNG VUI CÙNG CHÚNG TÔI</p>
         </div>
     </div>
 
@@ -1552,7 +1349,6 @@
             const overlay = document.getElementById('wedding-overlay');
             const envelope = document.getElementById('envelope');
             const waxSeal = document.getElementById('wax-seal');
-            const innerCard = document.getElementById('inner-card');
 
             document.body.style.overflow = 'hidden';
 
@@ -1562,9 +1358,9 @@
                 // Vỡ con dấu
                 waxSeal.classList.add('breaking');
 
-                // Sau 0.7s hiện ảnh
+                // Sau 0.7s mở phong bì và ảnh trồi lên
                 setTimeout(() => {
-                    innerCard.classList.add('show');
+                    envelope.classList.add('opening');
                 }, 700);
 
                 // PLAY MUSIC
@@ -1605,7 +1401,6 @@
         });
     </script>
     <!-- END WEDDING INVITATION POPUP -->
-
 
     <header>
         <section id="banner" class="bg_overlay">
@@ -1820,130 +1615,132 @@
                 </div>
             </div>
 
-            <div class="invitation">
-                <div class="invitation-container">
-                    <div class="invitation-card">
-                        <img data-src="wp-content/pic/damcuoi.jpg" alt="" class="lazyload">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 40px;">
+                <div class="invitation">
+                    <div class="invitation-container-box">
+                        <div class="invitation-card">
+                            <img data-src="wp-content/pic/damcuoi.jpg" alt="" class="lazyload">
 
-                        <h3 class="card-title uk-margin-remove">
-                            At Home
-                        </h3>
+                            <h3 class="card-title uk-margin-remove">
+                                At Home
+                            </h3>
 
-                        <address class="uk-margin-remove">
-                            <p>
-                                Hàm Thuận Nam, tỉnh Lâm Đồng
-                            </p>
-                        </address>
-
-                        <div class="invitation-body">
-                            <div class="invi_time">
-                                <p class="fw-bold">Lúc
-                                    <span class="invi_hours">
-                                        11:30 AM
-                                    </span>
+                            <address class="uk-margin-remove">
+                                <p>
+                                    Hàm Thuận Nam, tỉnh Lâm Đồng
                                 </p>
+                            </address>
 
-                                <div class="invi_group_time">
-                                    <span class="invi_date_text">
-                                        Thứ 7
-                                    </span>
+                            <div class="invitation-body">
+                                <div class="invi_time">
+                                    <p class="fw-bold">Lúc
+                                        <span class="invi_hours">
+                                            11:30 AM
+                                        </span>
+                                    </p>
 
-                                    <span class="invi_date_number">
-                                        <p class="invi_date">
-                                            10
-                                        </p>/
+                                    <div class="invi_group_time">
+                                        <span class="invi_date_text">
+                                            Thứ 7
+                                        </span>
 
-                                        <p class="invi_month">
-                                            01
-                                        </p>
-                                    </span>
+                                        <span class="invi_date_number">
+                                            <p class="invi_date">
+                                                10
+                                            </p>/
 
-                                    <span class="invi_year_text">
-                                        2026
-                                    </span>
+                                            <p class="invi_month">
+                                                01
+                                            </p>
+                                        </span>
+
+                                        <span class="invi_year_text">
+                                            2026
+                                        </span>
+                                    </div>
+
+                                    <p class="invi_amlich">30-01-2026 (Lunar Calendar)</p>
                                 </div>
+                            </div>
 
-                                <p class="invi_amlich">30-01-2026 (Lunar Calendar)</p>
+                            <div class="social-link">
+                                <a href="tel:+84969619348" class="phone_number">
+                                    <i class="ri-phone-fill">
+                                    </i>
+                                </a>
+
+                                <a href="https://maps.app.goo.gl/FAiS4YMMpGH2QFa5A" class="invi_map" target="_blank">
+                                    <i class='ri-map-2-line'>
+                                    </i>
+                                </a>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="social-link">
-                            <a href="tel:+84969619348" class="phone_number">
-                                <i class="ri-phone-fill">
-                                </i>
-                            </a>
+                <div class="invitation">
+                    <div class="invitation-container-box">
+                        <div class="invitation-card">
+                            <img data-src="wp-content/pic/damcuoi.jpg" alt="" class="lazyload">
 
-                            <a href="https://maps.app.goo.gl/FAiS4YMMpGH2QFa5A" class="invi_map" target="_blank">
-                                <i class='ri-map-2-line'>
-                                </i>
-                            </a>
+                            <h3 class="card-title uk-margin-remove">
+                                At Home
+                            </h3>
+
+                            <address class="uk-margin-remove">
+                                <p>
+                                    Quận 4, Tp. Hồ Chí Minh
+                                </p>
+                            </address>
+
+                            <div class="invitation-body">
+                                <div class="invi_time">
+                                    <p class="fw-bold">At
+                                        <span class="invi_hours">
+                                            09:00 AM
+                                        </span>
+                                    </p>
+
+                                    <div class="invi_group_time">
+                                        <span class="invi_date_text">
+                                            Thứ 7
+                                        </span>
+
+                                        <span class="invi_date_number">
+                                            <p class="invi_date">
+                                                17
+                                            </p>/
+
+                                            <p class="invi_month">
+                                                01
+                                            </p>
+                                        </span>
+
+                                        <span class="invi_year_text">
+                                            2026
+                                        </span>
+                                    </div>
+
+                                    <p class="invi_amlich">17-01-2026 (Lunar Calendar)</p>
+                                </div>
+                            </div>
+
+                            <div class="social-link">
+                                <a href="tel:+84349693092" class="phone_number">
+                                    <i class="ri-phone-fill">
+                                    </i>
+                                </a>
+
+                                <a href="https://maps.app.goo.gl/EqYV4c79Vm1exFtD8" class="invi_map" target="_blank">
+                                    <i class='ri-map-2-line'>
+                                    </i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="invitation">
-                <div class="invitation-container">
-                    <div class="invitation-card">
-                        <img data-src="wp-content/pic/damcuoi.jpg" alt="" class="lazyload">
-
-                        <h3 class="card-title uk-margin-remove">
-                            At Home
-                        </h3>
-
-                        <address class="uk-margin-remove">
-                            <p>
-                                Quận 4, Tp. Hồ Chí Minh
-                            </p>
-                        </address>
-
-                        <div class="invitation-body">
-                            <div class="invi_time">
-                                <p class="fw-bold">At
-                                    <span class="invi_hours">
-                                        09:00 AM
-                                    </span>
-                                </p>
-
-                                <div class="invi_group_time">
-                                    <span class="invi_date_text">
-                                        Thứ 7
-                                    </span>
-
-                                    <span class="invi_date_number">
-                                        <p class="invi_date">
-                                            17
-                                        </p>/
-
-                                        <p class="invi_month">
-                                            01
-                                        </p>
-                                    </span>
-
-                                    <span class="invi_year_text">
-                                        2026
-                                    </span>
-                                </div>
-
-                                <p class="invi_amlich">17-01-2026 (Lunar Calendar)</p>
-                            </div>
-                        </div>
-
-                        <div class="social-link">
-                            <a href="tel:+84349693092" class="phone_number">
-                                <i class="ri-phone-fill">
-                                </i>
-                            </a>
-
-                            <a href="https://maps.app.goo.gl/EqYV4c79Vm1exFtD8" class="invi_map" target="_blank">
-                                <i class='ri-map-2-line'>
-                                </i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div> <!-- Đóng wrapper -->
     </section>
     <!-- END COUNTDOWN END INVITATION--->
 
@@ -2579,6 +2376,12 @@
         <img data-src="wp-content/pic/damcuoi1.jpg" alt="" class="thankyou-bg lazyload" style="object-position:center;">
 
         <div class="thankyou-body container uk-position-relative uk-position-z-index">
+            <!-- Ảnh mylove với hiệu ứng lắc lư -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="wp-content/pic/mylove.png" alt="My Love"
+                    style="width: 150px; height: auto; animation: swing 3s ease-in-out infinite;">
+            </div>
+
             <h2 class="banner-title  script-font uk-heading-medium uk-text-center text-white" data-aos="fade-up"
                 data-aos-duration="3000">
                 Thank you
@@ -2817,7 +2620,9 @@
                 window.mainCountdownTimer = setInterval(runCountdown, 1000);
             }, 100);
         })();
+    </script>
 
+    <script>
         // Hiệu ứng trái tim rơi như tuyết
         (function () {
             let heartsInterval;
@@ -2994,119 +2799,6 @@
         }, 2000); // Chờ 2 giây sau khi trang load
     </script>
 
-
-
-    // Hiệu ứng trái tim rơi như tuyết
-    (function () {
-    let heartsInterval;
-    let isHeartsEnabled = true;
-    let heartsCount = 0;
-    const maxHearts = 30; // Giới hạn số lượng trái tim tối đa
-    const container = document.getElementById('hearts-container');
-    const toggleBtn = document.getElementById('toggleHearts');
-
-    // Các loại kích thước
-    const sizes = ['small', 'medium', 'large'];
-
-    // Các loại màu sắc
-    const colors = ['pink', 'red', 'gold', 'rose'];
-
-    // Các loại animation
-    const animations = ['', 'sway', 'sparkle'];
-
-    // Hàm tạo trái tim
-    function createHeart() {
-    if (!isHeartsEnabled || heartsCount >= maxHearts) return;
-
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-
-    // Random kích thước
-    const size = sizes[Math.floor(Math.random() * sizes.length)];
-    heart.classList.add(`heart-${size}`);
-
-    // Random màu sắc
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    heart.classList.add(`heart-${color}`);
-
-    // Random animation (50% chance cho mỗi loại)
-    if (Math.random() > 0.5) {
-    const animation = animations[Math.floor(Math.random() * animations.length)];
-    if (animation) heart.classList.add(`heart-${animation}`);
-    }
-
-    // Random vị trí nằm ngang
-    const leftPosition = Math.random() * 100;
-    heart.style.left = `${leftPosition}%`;
-
-    // Random thời gian rơi (từ 5-15 giây)
-    const duration = Math.random() * 10 + 5;
-    heart.style.animationDuration = `${duration} s`;
-
-    // Nếu có animation dao động, set thời gian dao động
-    if (heart.classList.contains('heart-sway')) {
-    const swayDuration = Math.random() * 2 + 3;
-    heart.style.animationDuration = `${duration} s, ${swayDuration} s`;
-    }
-
-    // Random độ trễ animation
-    const delay = Math.random() * 2;
-    heart.style.animationDelay = `${delay} s`;
-
-    // Thêm vào container
-    container.appendChild(heart);
-    heartsCount++;
-
-    // Tự động xóa sau khi animation kết thúc
-    setTimeout(() => {
-    heart.remove();
-    heartsCount--;
-    }, (duration + delay) * 1000);
-    }
-
-    // Bắt đầu hiệu ứng
-    function startHearts() {
-    if (heartsInterval) return;
-
-    // Tạo trái tim đầu tiên ngay lập tức
-    createHeart();
-
-    // Tiếp tục tạo trái tim mới mỗi 300-800ms
-    heartsInterval = setInterval(() => {
-    createHeart();
-    }, Math.random() * 500 + 300);
-    }
-
-    // Dừng hiệu ứng
-    function stopHearts() {
-    if (heartsInterval) {
-    clearInterval(heartsInterval);
-    heartsInterval = null;
-    }
-    }
-
-    // Xử lý nút bật/tắt
-    if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-    isHeartsEnabled = !isHeartsEnabled;
-
-    if (isHeartsEnabled) {
-    toggleBtn.classList.remove('disabled');
-    startHearts();
-    } else {
-    toggleBtn.classList.add('disabled');
-    stopHearts();
-    container.innerHTML = '';
-    heartsCount = 0;
-    }
-    });
-    }
-
-    // Auto start
-    setTimeout(() => {
-    startHearts();
-    }, 1000);
-    })();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
@@ -3274,41 +2966,6 @@
         })();
     </script>
 
-
-
-
-
-
-
-
-    toggleBtn.classList.remove('disabled');
-    startHearts();
-    } else {
-    toggleBtn.classList.add('disabled');
-    stopHearts();
-    // Xóa tất cả trái tim hiện tại
-    container.innerHTML = '';
-    heartsCount = 0;
-    }
-    });
-    }
-
-    // Bắt đầu hiệu ứng khi modal welcome đóng
-    const originalStartBtn = document.getElementById('startButton');
-    if (originalStartBtn) {
-    originalStartBtn.addEventListener('click', () => {
-    // Chờ một chút rồi bắt đầu hiệu ứng
-    setTimeout(() => {
-    startHearts();
-    }, 500);
-    });
-    } else {
-    // Nếu không có modal, bắt đầu luôn
-    setTimeout(() => {
-    startHearts();
-    }, 1000);
-    }
-    })();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
@@ -3382,7 +3039,7 @@
             const CONFIG = {
                 speed: 0.8,
                 pauseTime: 2500,
-                loopAtEnd: true,
+                loopAtEnd: false,
                 touchThreshold: 5
             };
 
