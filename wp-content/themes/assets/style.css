@@ -962,7 +962,7 @@ body {
 
 .count-down {
     background: var(--primary-color);
-    padding: 20px;
+    padding: 110px;
     border-radius: 120px 120px 0 0;
     display: flex;
     flex-direction: column;
