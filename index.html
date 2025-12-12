@@ -1132,11 +1132,10 @@
         /* Ảnh cặp đôi trong phong bì */
         .envelope-photo {
             position: absolute;
-            bottom: 0;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(100%);
-            width: 85%;
-            max-width: 280px;
+            max-width: 350px;
             height: 0;
             border-radius: 10px 10px 0 0;
             overflow: hidden;
@@ -1146,7 +1145,8 @@
         }
 
         .envelope.opening .envelope-photo {
-            height: 240px;
+            height: 300px;
+            width: 200px;
             transform: translateX(-50%) translateY(-120px);
         }
 
@@ -1263,7 +1263,8 @@
             }
 
             .envelope.opening .envelope-photo {
-                height: 240px;
+                height: 300px;
+                width: 200px;
                 transform: translateX(-50%) translateY(-100px);
             }
         }
@@ -1335,7 +1336,7 @@
                 </div>
                 <!-- Ảnh trong phong bì -->
                 <div class="envelope-photo">
-                    <img src="wp-content/pic/damcuoi.jpg" alt="Couple Photo">
+                    <img src="wp-content/pic/wedding_invitation.jpg" alt="Couple Photo">
                 </div>
             </div>
 
@@ -1396,7 +1397,7 @@
                         tryStartAutoScroll();
                         console.log('✅ [ENVELOPE] Closed');
                     }, 1000);
-                }, 3000);
+                }, 3300);
             });
         });
     </script>
@@ -1404,7 +1405,7 @@
 
     <header>
         <section id="banner" class="bg_overlay">
-            <img data-src="wp-content/pic/damcuoi.jpg" alt="" class="banner-bg img_bg banner_top lazyload"
+            <img data-src="wp-content/pic/wedding1.jpg" alt="" class="banner-bg img_bg banner_top lazyload"
                 style="background-position:center center;">
 
             <div class="container">
@@ -1489,7 +1490,7 @@
                 </p>
                 <h2 class="section-title section-title-with-icons">
                     <img src="wp-content/pic/codau.png" alt="Cô dâu" class="bride-groom-icon" loading="lazy">
-                    <span>Cô dâu and Chú rể</span>
+                    <span>Cô dâu & Chú rể</span>
                     <img src="wp-content/pic/chure.png" alt="Chú rể" class="bride-groom-icon" loading="lazy">
                 </h2>
             </div>
@@ -1497,63 +1498,29 @@
             <div class="about-container">
                 <div class="about-card" style="order:1">
                     <div class="about-media">
-                        <img data-src="wp-content/pic/huyentran.JPG" alt="" class="bride_img lazyload">
+                        <img data-src="wp-content/pic/avatar_bride.jpg" alt="" class="bride_img lazyload">
                     </div>
 
                     <div class="about-body" data-aos="fade-up" data-aos-duration="3000">
-                        <h3 class="bride_name uk-margin-remove">
-                            Công chúa
+                        <h3 class="bride_name uk-margin-remove" style="font-size: 23px !important;">
+                            At this moment, love and being loved happen at the same time.
                         </h3>
-
-                        <p class="bride_birthday uk-margin-remove">
-                            #xinhdep #banker #camxuc #thanthien #tute
-                        </p>
-
                         <p class="bride_des">
                         </p>
-
-                        <div class="social-link">
-                            <a href="tel:+84969619348" class="gr_phone">
-                                <i class="ri-phone-fill">
-                                </i>
-                            </a>
-
-                            <a href="#gift" class="">
-                                <i class="ri-gift-2-fill">
-                                </i>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
                 <div class="about-card" style="order:2">
                     <div class="about-media">
-                        <img data-src="wp-content/pic/dalat1.JPG" alt="" class="groom_img lazyload">
+                        <img data-src="wp-content/pic/avatar_groom.jpg" alt="" class="groom_img lazyload">
                     </div>
 
                     <div class="about-body" data-aos="fade-up" data-aos-duration="3000">
-                        <h3 class="groom_name uk-margin-remove">
-                            Hoàng tử
+                        <h3 class="groom_name uk-margin-remove" style="font-size: 23px !important;">
+                            "Ngay giây phút này, chúng ta vừa yêu, và vừa được yêu. 💕"
                         </h3>
-
-                        <p class="groom_birthday uk-margin-remove">
-                            #vuive #hoadong #tute #ots #it
-                        </p>
-
                         <p class="groom_des">
                         </p>
-
-                        <div class="social-link">
-                            <a href="tel:+84349693092" class="gr_phone">
-                                <i class="ri-phone-fill">
-                                </i>
-                            </a>
-
-                            <a href="#gift" class="">
-                                <i class="ri-gift-2-fill">
-                                </i>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2869,8 +2836,8 @@
 
             // Cấu hình
             const CONFIG = {
-                speed: 0.8,
-                pauseTime: 2500,
+                speed: 1,
+                pauseTime: 3500,
                 loopAtEnd: true,
                 touchThreshold: 5
             };
