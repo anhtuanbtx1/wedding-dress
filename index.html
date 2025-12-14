@@ -1126,6 +1126,64 @@
             font-style: italic;
         }
 
+        /* Responsive cho mobile */
+        @media (max-width: 768px) {
+            .envelope {
+                height: 180px;
+                /* Giảm chiều cao envelope để không tràn */
+                margin-bottom: 20px;
+            }
+
+            .envelope-photo {
+                width: 75% !important;
+                /* Giảm chiều rộng */
+                height: 200px !important;
+                /* Chiều cao cố định 200px */
+                max-height: none !important;
+                /* Bỏ max-height nếu có */
+                bottom: 15px;
+                /* Điều chỉnh vị trí đáy */
+            }
+
+            .envelope.opening .envelope-photo {
+                transform: translateX(-50%) translateY(-35%);
+                /* Giảm mức trồi lên */
+                z-index: 10;
+            }
+
+            .wax-seal-wrapper {
+                width: 60px;
+                /* Giảm kích thước wax-seal */
+                height: 60px;
+            }
+
+            .invitation-container {
+                padding: 25px 15px;
+                /* Giảm padding nhiều hơn */
+                max-width: 350px;
+                /* Giảm max-width */
+                width: 95%;
+                /* Chiếm 95% màn hình */
+            }
+
+            .envelope-flap {
+                height: 40%;
+                /* Giảm chiều cao flap */
+            }
+
+            .invitation-title {
+                font-size: 32px;
+                /* Giảm font size title */
+                margin-bottom: 10px;
+            }
+
+            .invitation-hint {
+                font-size: 12px;
+                /* Giảm font size hint */
+                margin-bottom: 20px;
+            }
+        }
+
         .envelope {
             position: relative;
             width: 100%;
@@ -1142,12 +1200,39 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            overflow: hidden;
+            /* Che phần dưới của ảnh ban đầu */
+        }
+
+        /* Khi mở, cho phép ảnh nhô ra ngoài */
+        .envelope.opening {
             overflow: visible;
         }
 
         .envelope:hover {
             transform: translateY(-5px);
         }
+
+        /* Lớp phủ màu envelope để che ảnh ban đầu */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4c4a8 0%, #c9b99a 50%, #d4c4a8 100%);
+            z-index: 3;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .envelope.opening::before {
+            opacity: 0;
+            /* Ẩn lớp phủ khi mở */
+        }
+
+
 
         .envelope-flap {
             position: absolute;
@@ -1166,31 +1251,49 @@
             transform: rotateX(-180deg);
         }
 
-        /* Ảnh cặp đôi trong phong bì */
+        /* Ảnh cặp đôi trong phong bì - hình tam giác chiếm 3/4 envelope */
         .envelope-photo {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
-            transform: translateX(-50%) translateY(100%);
-            max-width: 350px;
-            height: 0;
-            border-radius: 10px 10px 0 0;
+            transform: translateX(-50%) translateY(0);
+            /* Ban đầu ẩn hoàn toàn */
+            width: 85%;
+            /* Chiếm 85% chiều rộng envelope */
+            height: 75%;
+            /* Chiếm 3/4 chiều cao envelope (210px) */
             overflow: hidden;
             box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 5;
+            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2;
+            /* Dưới lớp phủ envelope::before (z-index: 3) */
+            /* Tạo hình tam giác ở phía dưới */
+            clip-path: polygon(0 0,
+                    /* Top left */
+                    100% 0,
+                    /* Top right */
+                    100% 60%,
+                    /* Right side */
+                    50% 100%,
+                    /* Bottom center (tạo mũi tam giác) */
+                    0 60%
+                    /* Left side */
+                );
         }
 
+        /* Khi mở envelope, ảnh nhô ra */
         .envelope.opening .envelope-photo {
-            height: 300px;
-            width: 200px;
-            transform: translateX(-50%) translateY(-120px);
+            transform: translateX(-50%) translateY(-50%);
+            /* Trồi lên 50% */
+            z-index: 10;
+            /* Z-index cao nhất để không bị che */
         }
 
         .envelope-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center top;
         }
 
         .wax-seal-wrapper {
@@ -1200,7 +1303,8 @@
             transform: translate(-50%, -50%);
             width: 110px;
             height: 110px;
-            z-index: 4;
+            z-index: 20;
+            /* Tăng z-index để luôn nổi lên trên ảnh */
             transition: all 0.4s ease;
         }
 
@@ -1217,6 +1321,13 @@
 
         .wax-seal-wrapper.breaking .wax-seal {
             animation: crack 0.7s ease-out forwards;
+        }
+
+        /* Giữ wax-seal hiển thị khi envelope mở */
+        .envelope.opening .wax-seal-wrapper {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translate(-50%, -50%) !important;
         }
 
         .invitation-text {
@@ -1441,7 +1552,7 @@
                         tryStartAutoScroll();
                         console.log('✅ [ENVELOPE] Closed');
                     }, 1000);
-                }, 3300);
+                }, 55555000);
             });
         });
     </script>
@@ -2337,7 +2448,7 @@
                     </div>
 
                     <div class="card-quote bottom-quote highlight">
-                        Cùng chúng kiến hành trình tình yêu bất đầu 💕
+                        Cùng nhau đồng hành hành trình tình yêu bất đầu 💕
                     </div>
                 </div>
             </div>
