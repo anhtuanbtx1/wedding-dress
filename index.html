@@ -1190,8 +1190,13 @@
             height: 280px;
             background: linear-gradient(135deg, #d4c4a8 0%, #c9b99a 50%, #d4c4a8 100%);
             border-radius: 8px;
+            /* Bóng mờ dưới chân - soft và realistic */
             box-shadow:
                 0 10px 30px rgba(0, 0, 0, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                /* Shadow chính */
+                0 30px 80px rgba(0, 0, 0, 0.1),
+                /* Shadow phụ xa hơn */
                 inset 0 2px 4px rgba(255, 255, 255, 0.3),
                 inset 0 -2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
@@ -1201,16 +1206,42 @@
             cursor: pointer;
             transition: all 0.3s ease;
             overflow: hidden;
-            /* Che phần dưới của ảnh ban đầu */
+            /* Bounce animation - nảy nảy nhẹ nhàng */
+            animation: gentleBounce 2s ease-in-out infinite;
+        }
+
+        /* Keyframe cho bounce effect */
+        @keyframes gentleBounce {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+                /* Nảy lên 10px */
+            }
         }
 
         /* Khi mở, cho phép ảnh nhô ra ngoài */
         .envelope.opening {
             overflow: visible;
+            animation: none;
+            /* Dừng bounce khi mở */
         }
 
         .envelope:hover {
             transform: translateY(-5px);
+            /* Hover nâng envelope lên */
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25),
+                0 25px 70px rgba(0, 0, 0, 0.2),
+                0 35px 90px rgba(0, 0, 0, 0.12),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            animation: none;
+            /* Pause bounce on hover */
         }
 
         /* Lớp phủ màu envelope để che ảnh ban đầu */
@@ -1552,7 +1583,7 @@
                         tryStartAutoScroll();
                         console.log('✅ [ENVELOPE] Closed');
                     }, 1000);
-                }, 55555000);
+                }, 5000);
             });
         });
     </script>
@@ -1659,7 +1690,7 @@
 
                     <div class="about-body" data-aos="fade-up" data-aos-duration="3000">
                         <h3 class="bride_name uk-margin-remove" style="font-size: 23px !important;">
-                            At this moment, love and being loved happen at the same time.
+                            "At this moment, love and being loved happen at the same time."
                         </h3>
                         <p class="bride_des">
                         </p>
@@ -1673,7 +1704,7 @@
 
                     <div class="about-body" data-aos="fade-up" data-aos-duration="3000">
                         <h3 class="groom_name uk-margin-remove" style="font-size: 23px !important;">
-                            "Ngay giây phút này, chúng ta vừa yêu, và vừa được yêu. 💕"
+                            "Ngay giây phút này, chúng ta vừa yêu, và vừa được yêu."
                         </h3>
                         <p class="groom_des">
                         </p>
@@ -2396,7 +2427,7 @@
                     </div>
 
                     <div class="card-image-container">
-                        <img src="wp-content/pic/damcuoi1.jpg" alt="Love Story" class="gallery-image">
+                        <img src="wp-content/pic/love_you.jpg" alt="Love Story" class="gallery-image">
                         <div class="image-overlay">
                             <p class="overlay-text">Tình yêu có thể vượt qua<br>thời gian và không gian</p>
                         </div>
@@ -2444,7 +2475,7 @@
                 <div class="gallery-card together-card" data-aos="fade-up" data-aos-duration="1000"
                     data-aos-delay="400">
                     <div class="card-image-container large">
-                        <img src="wp-content/pic/wedding1.jpg" alt="Together Forever" class="gallery-image">
+                        <img src="wp-content/pic/journey_5.jpg" alt="Together Forever" class="gallery-image">
                     </div>
 
                     <div class="card-quote bottom-quote highlight">
@@ -2925,28 +2956,10 @@
         </div>
 
         <div class="video-container">
-            <p class="subtitle">
-                VIDEO
-            </p>
-
-            <!-- <div class="video-list">
-                <div class="video-item">
-                    <video controls preload="none" class="lazyload"
-                        data-poster="https://s3.ap-southeast-1.amazonaws.com/tynab.wedding/image/1.webp"
-                        style="width: 100%; max-width: 768px; border-radius: 12px; box-shadow: 0 0 20px rgba(0 0 0 / 10%);">
-                        <source src="https://s3.ap-southeast-1.amazonaws.com/tynab.wedding/video/card.mp4"
-                            type="video/mp4">
-                        Your browser does not support the HTML5 Video element.
-                    </video>
-                </div>
-            </div> -->
-
-            <h2 class="section-title"> -- </h2>
 
             <div class="video-list">
                 <div class="video-item">
-                    <img data-src="https://s3.ap-southeast-1.amazonaws.com/tynab.wedding/image/card.webp" alt=""
-                        class="lazyload">
+                    <img data-src="wp-content/pic/thiep.png" alt="" class="lazyload">
                 </div>
             </div>
         </div>
@@ -2957,7 +2970,7 @@
         <div class="uk-overlay uk-overlay-primary uk-position-cover">
         </div>
 
-        <img data-src="wp-content/pic/damcuoi1.jpg" alt="" class="thankyou-bg lazyload" style="object-position:center;">
+        <img data-src="wp-content/pic/end.jpg" alt="" class="thankyou-bg lazyload" style="object-position:center;">
 
         <div class="thankyou-body container uk-position-relative uk-position-z-index">
             <!-- Ảnh mylove với hiệu ứng lắc lư -->
