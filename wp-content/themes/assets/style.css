@@ -1095,7 +1095,7 @@ body {
 .invitation-card img {
     max-width: 100%;
     width: 320px;
-    aspect-ratio: 1/1;
+    /*aspect-ratio: 1/1;*/
     object-fit: cover;
     padding: 8px;
     background-color: var(--text-white);
@@ -1306,3 +1306,77 @@ body {
 
 /* Largest devices such as desktops (1280px and up) */
 @media only screen and (min-width: 1280px) {}
+
+/* ====== PERFORMANCE OPTIMIZATIONS FOR AUTO-SCROLL ====== */
+
+/* GPU acceleration for smoother animations */
+#time-line,
+#time-line .timeline-item,
+#time-line .timeline-media,
+#time-line .timeline-body,
+.time-line-section {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+/* Reduce AOS animation duration for smoother auto-scroll experience */
+#time-line [data-aos][data-aos][data-aos-duration="1000"] {
+    transition-duration: 0.4s !important;
+}
+
+/* Pre-allocate space for lazy loaded images to prevent layout shifts */
+#time-line .timeline-media {
+    min-height: 150px;
+    contain: layout style paint;
+}
+
+#time-line .timline-img {
+    will-change: opacity;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Force hardware acceleration on animated elements */
+[data-aos] {
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* Reduce animation complexity during scroll */
+.time-line-section .timeline-item {
+    contain: content;
+}
+
+/* Optimize lazy loading image transitions */
+.lazyload,
+.lazyloading {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.lazyloaded {
+    opacity: 1;
+}
+
+/* Prevent reflow during scroll by fixing dimensions */
+#time-line .timeline-list {
+    contain: layout;
+}
+
+/* Smooth scrolling optimization */
+html {
+    scroll-behavior: auto;
+    /* Disable smooth for programmatic scrolling */
+}
+
+/* Gallery cards optimization */
+.gallery-card,
+.poem-content-wrapper {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+}
