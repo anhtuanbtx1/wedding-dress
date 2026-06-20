@@ -108,7 +108,7 @@
     cards.forEach((card, idx) => {
       const pt = card.pt;
       
-      # Rotate coordinates around Y axis
+      // Rotate coordinates around Y axis
       const rx = pt.x * cosY - pt.z * sinY;
       const rz = pt.x * sinY + pt.z * cosY;
       const ry = pt.y; // Y remains unchanged in Y-axis rotation
