@@ -1152,7 +1152,114 @@
             }
         }
     </style>
-</head>
+
+    <!-- HEART GRID GALLERY STYLE -->
+    <style>
+        .heart-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 580px;
+            overflow: hidden;
+            margin: 20px auto;
+            background: radial-gradient(circle, rgba(253,244,245,1) 0%, rgba(247,233,234,0.4) 100%);
+            border-radius: 24px;
+            box-shadow: inset 0 0 40px rgba(255, 182, 193, 0.15);
+        }
+
+        .heart-grid {
+            position: relative;
+            width: 520px;
+            height: 520px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            touch-action: none;
+        }
+
+        .heart-card {
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(240, 128, 128, 0.25);
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .heart-card:hover {
+            transform: translate(-50%, -50%) scale(1.4) !important;
+            border-color: #ffb6c1;
+            z-index: 99999 !important;
+            box-shadow: 0 8px 20px rgba(240, 128, 128, 0.45);
+        }
+
+        /* Modal xem ảnh lớn */
+        .heart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999999;
+            transition: opacity 0.3s ease;
+        }
+
+        .heart-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .heart-modal__panel {
+            max-width: 90%;
+            max-height: 80%;
+            background: #fff;
+            padding: 10px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.85);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .heart-modal.open .heart-modal__panel {
+            transform: scale(1);
+        }
+
+        .heart-modal__panel img {
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 768px) {
+            .heart-wrap {
+                height: 460px;
+            }
+            .heart-grid {
+                width: 400px;
+                height: 400px;
+            }
+            .heart-card {
+                width: 58px;
+                height: 58px;
+            }
+        }
+    </style>
+    </head>
 
 
 <body
@@ -1951,57 +2058,19 @@
                     <img src="./wwwroot/wp-content/pic/save_date.webp" alt="Save the date">
                 </h2>
             </div>
-            <!-- COUNTDOWN -->
-            <div class="count-down section-countdown img_bg bg_overlay lazyload" data-bg="./wwwroot/wp-content/pic/ring.webp"
-                style="background-image: none;">
-                <p class="subtitle">
-                    Đếm ngược đến ngày trọng đại 💕
-                </p>
-
-                <svg class="heartbeat" width="64" height="64" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="red"
-                        d="M16.5 13.287c-2.475-2.716-5.5-.712-5.5 2.112c0 2.56 1.814 4.035 3.358 5.292l.044.036l.427.35c.571.475 1.121.923 1.671.923s1.1-.448 1.671-.923C19.789 19.73 22 18.224 22 15.399c0-.927-.326-1.767-.853-2.38c-1.075-1.251-2.985-1.556-4.647.268Z" />
-                    <path fill="#f1ebe4"
-                        d="M8.106 18.247C5.298 16.083 2 13.542 2 9.137C2 4.274 7.5.825 12 5.501C16.5.825 22 4.274 22 9.137c0 .834-.118 1.6-.329 2.31a4.203 4.203 0 0 0-2.619-.947c-.89-.005-1.758.274-2.553.81c-1.39-.933-2.956-1.058-4.33-.395c-1.635.79-2.669 2.556-2.669 4.484c0 2.306 1.149 3.923 2.342 5.095c-.948-.076-1.897-.808-2.88-1.583c-.277-.219-.564-.44-.856-.664Z" />
-                </svg>
-
-                <!-- Countdown mới: Số ngày lớn + giờ:phút:giây nhỏ -->
-                <div class="countdown-display" style="text-align: center; padding: 40px 20px;">
-                    <!-- Số ngày lớn -->
-                    <div class="days-counter" style="margin-bottom: 30px;">
-                        <div id="main-days"
-                            style="font-size: 120px; font-weight: bold; line-height: 1; color: white; text-shadow: 0 4px 10px rgba(0,0,0,0.3); font-family: var(--title-font);">
-                            <span class="countdown-days">00</span>
-                        </div>
-                        <div
-                            style="font-size: 28px; text-transform: uppercase; letter-spacing: 4px; margin-top: 15px; color: white; opacity: 0.95; font-family: var(--primary-font);">
-                            NGÀY NỮA
-                        </div>
-                    </div>
-
-                    <!-- Giờ:Phút:Giây nhỏ -->
-                    <div class="time-counter"
-                        style="display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 36px; color: white; opacity: 0.9; font-family: var(--title-font);">
-                        <span class="countdown-hours" style="font-weight: bold;">00</span>
-                        <span style="font-weight: 300;">:</span>
-                        <span class="countdown-minutes" style="font-weight: bold;">00</span>
-                        <span style="font-weight: 300;">:</span>
-                        <span class="countdown-seconds" style="font-weight: bold;">00</span>
-                    </div>
-                    <div
-                        style="font-size: 14px; color: white; opacity: 0.7; margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;">
-                        Giờ : Phút : Giây
-                    </div>
-
-                    <!-- Thông điệp -->
-                    <div id="countdown-message"
-                        style="margin-top: 30px; font-size: 20px; color: white; font-family: var(--script-font);">
-                        ✨ Đang đếm ngược... ✨
-                    </div>
+            
+            <!-- HEART GRID GALLERY -->
+            <div class="heart-wrap">
+                <div id="heart-grid" class="heart-grid" aria-label="Heart image gallery"></div>
+            </div>
+            
+            <div id="heart-modal" class="heart-modal" aria-hidden="true">
+                <div class="heart-modal__panel">
+                    <img id="heart-modal-img" alt="Selected photo">
                 </div>
             </div>
-
-            <!-- Sweet Day Image and Text -->
+            <!-- HEART GRID GALLERY END -->
+    <!-- Sweet Day Image and Text -->
             <div style="text-align: center; margin-top: 60px; margin-bottom: 40px;">
                 <img src="./wwwroot/wp-content/pic/swee_day.webp" alt="Sweet Day"
                     style="max-width: 300px; width: 100%; height: auto;" class="lazyload"
@@ -3403,6 +3472,7 @@
     </script>
 
     <script src="image-reveal-animation.js"></script>
+    <script src="./heart-grid-animation.js"></script>
 </body>
 
 </html>
