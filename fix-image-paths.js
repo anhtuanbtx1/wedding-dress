@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
             let src = img.getAttribute('src');
             if (src && !src.startsWith('http') && !src.startsWith('//')) {
                 // Nếu src bắt đầu với /, loại bỏ nó
+                if (src.startsWith('./')) {
+                    src = src.substring(2);
+                }
                 if (src.startsWith('/')) {
                     src = src.substring(1);
                 }
@@ -31,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function() {
             let dataSrc = img.getAttribute('data-src');
             if (dataSrc && !dataSrc.startsWith('http') && !dataSrc.startsWith('//')) {
                 // Nếu data-src bắt đầu với /, loại bỏ nó
+                if (dataSrc.startsWith('./')) {
+                    dataSrc = dataSrc.substring(2);
+                }
                 if (dataSrc.startsWith('/')) {
                     dataSrc = dataSrc.substring(1);
                 }
@@ -43,6 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
         bgElements.forEach(el => {
             let bgUrl = el.getAttribute('data-bg');
             if (bgUrl && !bgUrl.startsWith('http') && !bgUrl.startsWith('//')) {
+                if (bgUrl.startsWith('./')) {
+                    bgUrl = bgUrl.substring(2);
+                }
                 if (bgUrl.startsWith('/')) {
                     bgUrl = bgUrl.substring(1);
                 }
@@ -55,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
         links.forEach(link => {
             let href = link.getAttribute('href');
             if (href && !href.startsWith('http') && !href.startsWith('//')) {
+                if (href.startsWith('./')) {
+                    href = href.substring(2);
+                }
                 if (href.startsWith('/')) {
                     href = href.substring(1);
                 }
@@ -67,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         metaTags.forEach(meta => {
             let content = meta.getAttribute('content');
             if (content && !content.startsWith('http') && !content.startsWith('//')) {
+                if (content.startsWith('./')) {
+                    content = content.substring(2);
+                }
                 if (content.startsWith('/')) {
                     content = content.substring(1);
                 }

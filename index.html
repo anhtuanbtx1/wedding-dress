@@ -1168,59 +1168,169 @@
     
 
     <style>
-        /* PERFECT ENVELOPE FIX */
-        
-        /* 1. Trạng thái ban đầu: Ảnh giấu hoàn toàn trong phong bì */
-        .envelope .envelope-photo {
-            transform: translateX(-50%) translateY(0) !important;
-            opacity: 0 !important; /* Ẩn ảnh đi */
-            z-index: 2 !important; /* Nằm dưới nắp phong bì */
-            pointer-events: none;
-        }
+        </style>
 
-        /* 2. Dấu sáp ban đầu: Nằm chính giữa, đè lên tất cả */
-        .envelope .wax-seal-wrapper {
-            z-index: 30 !important;
-            transform: translate(-50%, -50%) !important;
-        }
+<style>
+/* =========================================
+   ENVELOPE V2 (4-FLAP FOLD)
+========================================= */
+.envelope-v2-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 280px;
+    margin: 0 auto 30px auto;
+    perspective: 1500px; /* Tạo độ sâu 3D */
+    animation: gentleBounce 2s ease-in-out infinite;
+    cursor: pointer;
+}
 
-        /* 3. Lớp phủ che phong bì (::before): Nằm trên ảnh, dưới dấu sáp */
-        .envelope::before {
-            z-index: 10 !important;
-            opacity: 1 !important;
-        }
+.envelope-v2-container.opening {
+    animation: none;
+}
 
-        /* 4. Trạng thái mở thiệp: Ảnh trồi lên */
-        .envelope.opening .envelope-photo {
-            transform: translateX(-50%) translateY(-72%) !important;
-            opacity: 1 !important; /* Hiện ảnh */
-            z-index: 20 !important; /* Trồi lên trên nắp phong bì đã mở */
-            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-        }
+.envelope-v2 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    /* Bóng mờ dưới chân - soft và realistic */
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 30px 80px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d; /* Cho phép các flap lật 3D */
+    background: #d4c4a8; /* Nền của đáy phong bì (mặt trong) */
+}
 
-        /* 5. Trạng thái mở thiệp: Dấu sáp đè lên ảnh, hơi dịch xuống dưới */
-        .envelope.opening .wax-seal-wrapper {
-            z-index: 40 !important; /* Đè lên ảnh đang trồi lên */
-            transform: translate(-50%, -10%) !important; /* Giữ nguyên ở mép bì thư */
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
+/* Các cánh phong bì */
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Tránh click nhầm */
+}
 
-        /* 6. Trạng thái mở thiệp: Lớp phủ che biến mất để nhường chỗ cho ảnh */
-        .envelope.opening::before {
-            opacity: 0 !important;
-        }
+/* Cánh trái */
+.left-flap {
+    background: #c9b99a; /* Màu nhạt vừa */
+    clip-path: polygon(0 0, 50% 50%, 0 100%);
+    z-index: 4;
+}
 
-        /* Responsive cho Mobile */
-        @media (max-width: 767px) {
-            .envelope.opening .envelope-photo {
-                transform: translateX(-50%) translateY(-66%) !important;
-            }
-            .envelope.opening .wax-seal-wrapper {
-                transform: translate(-50%, -5%) !important;
-            }
-        }
-    </style>
+/* Cánh phải */
+.right-flap {
+    background: #c9b99a; /* Màu nhạt vừa */
+    clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+    z-index: 4;
+}
+
+/* Cánh dưới (nằm đè lên trái/phải) */
+.bottom-flap {
+    background: #e6dfcb; /* Màu sáng nhất */
+    clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+    z-index: 5;
+}
+
+/* Cánh trên (nắp đậy - nằm đè lên tất cả) */
+.top-flap {
+    background: #a89878; /* Màu tối nhất */
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+    z-index: 6;
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- ANIMATION KHI MỞ --- */
+/* 1. Lật nắp phong bì ra sau */
+.envelope-v2-container.opening .top-flap {
+    transform: rotateX(-180deg);
+    z-index: 1; /* Rớt xuống dưới ảnh */
+}
+
+/* --- ẢNH TRONG PHONG BÌ --- */
+.envelope-photo-v2 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    width: 85%;
+    height: 90%;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    z-index: 3; /* Nằm trên mặt trong, nằm dưới các flap trái/phải/dưới/trên */
+    transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s; /* Delay 0.3s đợi nắp mở */
+}
+
+.envelope-photo-v2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 28px 28px 0 0; /* Bo tròn 2 góc trên */
+}
+
+/* 2. Ảnh trồi lên khi mở */
+.envelope-v2-container.opening .envelope-photo-v2 {
+    transform: translateX(-50%) translateY(-32%);
+    z-index: 3; /* Vẫn phải nằm kẹp sau Bottom flap và trái phải (nếu ảnh cao hơn thì z-index ảnh hưởng) */
+}
+/* Sửa z-index khi mở để ảnh trồi lên TRÊN các flap kia (nếu không nó bị cắt bởi clip-path hoặc nằm dưới bị che) */
+/* Cụ thể: Bức ảnh khi trồi lên phải nằm đằng sau mặt trước của phong bì (bottom flap, left/right) 
+   => Ta để nguyên z-index: 3, nó tự chui ra từ khe hở (do top flap đã lật ngược ra sau z-index: 1). Rất thật! */
+
+/* --- DẤU SÁP --- */
+.wax-seal-wrapper-v2 {
+    pointer-events: none;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    z-index: 10; /* Cao nhất */
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wax-seal-v2 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng pulse khi nhấn con dấu */
+.wax-seal-wrapper-v2.pressed .wax-seal-v2 {
+    transform: scale(0.9);
+}
+
+/* 3. Dấu sáp trượt theo nắp lên trên khi mở, hoặc giữ nguyên ở giữa tùy lựa chọn. 
+   Mẫu user gửi là: nắp bung lên, ảnh trồi lên, con dấu nằm chính giữa mép giao cắt. 
+   Vì seal ban đầu nằm ở 50%, khi nắp mở ra, mép phong bì ở 50% => seal đứng yên.
+*/
+.envelope-v2-container.opening .wax-seal-wrapper-v2 {
+    pointer-events: none;
+
+    transform: translate(-50%, -15%); /* Trượt lên nhẹ vừa bám đúng mép thẻ chui ra */
+    z-index: 15; /* Nằm đè lên tấm ảnh */
+}
+
+/* Responsive mobile */
+@media (max-width: 480px) {
+    .envelope-v2-container {
+        height: 220px;
+    }
+    .wax-seal-wrapper-v2 {
+    pointer-events: none;
+
+        width: 60px;
+        height: 60px;
+    }
+}
+</style>
+
 </head>
 
 
@@ -1389,10 +1499,7 @@
             }
 
             
-.envelope.opening .envelope-photo {
-    transform: translateX(-50%) translateY(-35%) !important;
-    z-index: 10 !important; /* Below seal */
-}
+
 
 
             .wax-seal-wrapper {
@@ -1502,10 +1609,7 @@
             pointer-events: none;
         }
 
-        .envelope.opening::before {
-            opacity: 0;
-            z-index: 1;
-        }
+        
 
 
 
@@ -1522,9 +1626,7 @@
             z-index: 3;
         }
 
-        .envelope.opening .envelope-flap {
-            transform: rotateX(-180deg);
-        }
+        
 
         /* Ảnh cặp đôi trong phong bì - hình tam giác chiếm 3/4 envelope */
         .envelope-photo {
@@ -1558,10 +1660,7 @@
 
         /* Khi mở envelope, ảnh nhô ra */
         
-.envelope.opening .envelope-photo {
-    transform: translateX(-50%) translateY(-35%) !important;
-    z-index: 10 !important; /* Below seal */
-}
+
 
 
         .envelope-photo img {
@@ -1614,12 +1713,7 @@
 
         /* Giữ wax-seal hiển thị khi envelope mở */
         
-.envelope.opening .wax-seal-wrapper {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translate(-50%, -50%) !important;
-    z-index: 99 !important; /* Force top */
-}
+
 
 
         .invitation-text {
@@ -1703,10 +1797,7 @@
             }
 
             
-.envelope.opening .envelope-photo {
-    transform: translateX(-50%) translateY(-35%) !important;
-    z-index: 10 !important; /* Below seal */
-}
+
 
         }
 
@@ -1767,25 +1858,37 @@
             <h1 class="invitation-title">Wedding Invitation</h1>
             <p class="invitation-hint">Chạm để mở thiệp</p>
 
-            <div class="envelope" id="envelope">
-                <div class="envelope-flap"></div>
-                <div class="wax-seal-wrapper" id="wax-seal">
-                    <img src="./wwwroot/wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal">
-                </div>
-                <!-- Ảnh trong phong bì -->
-                <div class="envelope-photo">
-                    <img src="./wwwroot/wp-content/pic/wedding_invitation.webp" alt="Couple Photo">
-                </div>
+            
+    <!-- NEW 4-FLAP ENVELOPE -->
+    <div class="envelope-v2-container">
+        <div class="envelope-v2" id="envelope">
+            <!-- Ảnh chứa trong phong bì -->
+            <div class="envelope-photo-v2">
+                <img src="./wwwroot/wp-content/pic/wedding_invitation.webp" alt="Couple Photo">
             </div>
-
-            <p class="invitation-title-bottom">FOR YOU</p>
+            
+            <!-- 4 cánh phong bì -->
+            <div class="flap top-flap"></div>
+            <div class="flap bottom-flap"></div>
+            <div class="flap left-flap"></div>
+            <div class="flap right-flap"></div>
+            
+            <!-- Dấu sáp -->
+            <div class="wax-seal-wrapper-v2" id="wax-seal">
+                <img src="./wwwroot/wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal-v2">
+            </div>
         </div>
+    </div>
+
+    <p class="invitation-title-bottom" style="margin-top: 15px;">FOR YOU</p>
+</div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const overlay = document.getElementById('wedding-overlay');
-            const envelope = document.getElementById('envelope');
+            const envelopeContainer = document.querySelector('.envelope-v2-container');
+const envelope = document.getElementById('envelope');
             const waxSeal = document.getElementById('wax-seal');
 
 
@@ -1794,25 +1897,25 @@
             document.documentElement.classList.add('popup-opening');
             document.body.classList.add('popup-opening');
 
-            envelope.addEventListener('click', () => {
+            if (envelopeContainer && waxSeal) {
+                envelopeContainer.addEventListener('click', () => {
+                    // Nhấn nhẹ con dấu
+                    waxSeal.classList.add('pressed');
 
-                // Vỡ con dấu
-                waxSeal.classList.add('pressed');
+                    // Sau 0.7s mở phong bì và ảnh trồi lên
+                    setTimeout(() => {
+                        envelopeContainer.classList.add('opening');
+                    }, 700);
 
-                // Sau 0.7s mở phong bì và ảnh trồi lên
-                setTimeout(() => {
-                    envelope.classList.add('opening');
-                }, 700);
-
-                // PLAY MUSIC
-                const audio = document.getElementById('audio');
-                if (audio) {
-                    audio.volume = 1.0;
-                    audio.muted = false;
-                    audio.play().then(() => {
-                        console.log('✅ [MUSIC] Playing');
-                    }).catch(e => console.log('⚠️ [MUSIC] Error:', e.message));
-                }
+                    // PLAY MUSIC
+                    const audio = document.getElementById('audio');
+                    if (audio) {
+                        audio.volume = 1.0;
+                        audio.muted = false;
+                        audio.play().then(() => {
+                            console.log('✅ [MUSIC] Playing');
+                        }).catch(e => console.log('⚠️ [MUSIC] Error:', e.message));
+                    }
 
                 // START AUTO SCROLL
                 function tryStartAutoScroll(retries = 5) {
@@ -1843,6 +1946,7 @@
                     }, 1000);
                 }, 3000);
             });
+            }
         });
     </script>
     <!-- END WEDDING INVITATION POPUP -->
@@ -3242,7 +3346,7 @@
                 isScrolling = true;
                 console.log('▶️ Auto scroll running...');
 
-                const audio = document.getElementById('audio');
+                const audio = document.getElementById('audio'); }); }
                 if (audio && audio.paused) {
                     audio.play().catch(() => { });
                 }
@@ -3420,7 +3524,7 @@
 
                 isScrolling = true;
 
-                const audio = document.getElementById('audio');
+                const audio = document.getElementById('audio'); }); }
                 if (audio && audio.paused) {
                     audio.play().catch(() => { });
                 }
