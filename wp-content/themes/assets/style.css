@@ -235,6 +235,7 @@ html {
 
 body {
     font-family: var(--primary-font);
+    background-color: #f0ecd7;
 }
 
 /* ========= ELEMENT ========== */
@@ -678,14 +679,21 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    -webkit-animation: kenburns-top 10s ease-out infinite both;
-    animation: kenburns-top 10s ease-out infinite both
+    /* -webkit-animation: kenburns-top 10s ease-out infinite both;
+    animation: kenburns-top 10s ease-out infinite both */
 }
 
 #banner {
     height: 100vh;
     overflow: hidden;
     position: relative;
+}
+
+/* Height 100vh chỉ áp dụng cho mobile */
+@media (max-width: 768px) {
+    #banner {
+        height: 100vh;
+    }
 }
 
 .overlay {
@@ -932,7 +940,7 @@ body {
 
 .timeline-media img {
     aspect-ratio: 1/1;
-    object-fit: cover;
+    /* object-fit: cover; */
     max-width: 100%;
     border-radius: 8px;
 }
@@ -956,8 +964,8 @@ body {
 
 /* COUNTDOWN */
 #countdown-section {
-    margin-top: 80px;
-    padding: 80px 0;
+    margin-top: 0;
+    padding: 30px 0;
 }
 
 .count-down {
@@ -970,6 +978,19 @@ body {
     color: var(--text-white);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
+    min-height: 400px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .count-down {
+        padding: 60px 20px;
+        border-radius: 60px 60px 0 0;
+        background-size: cover;
+        background-position: center center;
+        min-height: 500px;
+    }
 }
 
 .count-down .section-title {
@@ -1093,6 +1114,7 @@ body {
 }
 
 .invitation-card img {
+    height: 430px;
     max-width: 100%;
     width: 320px;
     /*aspect-ratio: 1/1;*/

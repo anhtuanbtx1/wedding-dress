@@ -679,11 +679,7 @@ select {
 
 }
 
-.gift-qr {
-
-    max-width: 300px;
-
-}
+.gift-qr {}
 
 .gift-body .groom_name,
 .gift-body .bride_name {
