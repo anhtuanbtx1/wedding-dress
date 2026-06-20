@@ -4,12 +4,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Lấy base URL từ config hoặc tự động detect
     const getBaseUrl = () => {
-        // Nếu đang ở local
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            return '';
-        }
-        // Nếu đang ở production, lấy protocol + hostname
-        return window.location.protocol + '//' + window.location.hostname;
+        // Lấy đầy đủ protocol + host (host tự động bao gồm cả port nếu có, ví dụ: IP:8888 hoặc domain:port)
+        return window.location.protocol + '//' + window.location.host;
     };
 
     const BASE_URL = getBaseUrl();

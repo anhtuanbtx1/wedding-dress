@@ -30,7 +30,7 @@
         }
     </style>
 
-    <link rel='stylesheet' id='wp-block-library-css' href='wp-includes/css/style.min380f.css' media='all'>
+    <link rel='stylesheet' id='wp-block-library-css' href='./wwwroot/wp-includes/css/style.min380f.css' media='all'>
 
     <style id='rank-math-toc-block-style-inline-css'>
         .wp-block-rank-math-toc-block nav ol {
@@ -938,29 +938,29 @@
         }
     </style>
 
-    <link rel='stylesheet' id='uikit-css' href='wp-content/themes/css/uikit.min8a54.css' media='all'>
-    <link rel='stylesheet' id='reset uikit-css' href='wp-content/themes/css/reset18a54.css' media='all'>
+    <link rel='stylesheet' id='uikit-css' href='./wwwroot/wp-content/themes/css/uikit.min8a54.css' media='all'>
+    <link rel='stylesheet' id='reset uikit-css' href='./wwwroot/wp-content/themes/css/reset18a54.css' media='all'>
     <link rel='stylesheet' id='remixicon-css'
         href='https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css?ver=1.0.0' media='all'>
-    <link rel='stylesheet' id='preload-css' href='wp-content/themes/css/preload8a54.css' media='all'>
-    <link rel='stylesheet' id='wedding reset-css' href='wp-content/themes/css/reset-wedding8a54.css' media='all'>
+    <link rel='stylesheet' id='preload-css' href='./wwwroot/wp-content/themes/css/preload8a54.css' media='all'>
+    <link rel='stylesheet' id='wedding reset-css' href='./wwwroot/wp-content/themes/css/reset-wedding8a54.css' media='all'>
     <link rel='stylesheet' id='fancybox-css'
         href='https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css?ver=1.0.0' media='all'>
     <link rel='stylesheet' id='swiper slide-css'
         href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?ver=1.0.0' media='all'>
-    <link rel='stylesheet' id='animation-css' href='wp-content/themes/css/animation8a54.css' media='all'>
-    <link rel='stylesheet' id='aos style-css' href='wp-content/themes/css/aos8a54.css' media='all'>
-    <link rel='stylesheet' id='footer style-css' href='wp-content/themes/css/footer8a54.css' media='all'>
-    <link rel='stylesheet' id='wedding style-css' href='wp-content/themes/css/wedding8a54.css' media='all'>
-    <link rel='stylesheet' id='theme-css' href='wp-content/themes/css/theme8a54.css' media='all'>
+    <link rel='stylesheet' id='animation-css' href='./wwwroot/wp-content/themes/css/animation8a54.css' media='all'>
+    <link rel='stylesheet' id='aos style-css' href='./wwwroot/wp-content/themes/css/aos8a54.css' media='all'>
+    <link rel='stylesheet' id='footer style-css' href='./wwwroot/wp-content/themes/css/footer8a54.css' media='all'>
+    <link rel='stylesheet' id='wedding style-css' href='./wwwroot/wp-content/themes/css/wedding8a54.css' media='all'>
+    <link rel='stylesheet' id='theme-css' href='./wwwroot/wp-content/themes/css/theme8a54.css' media='all'>
 
-    <script src="wp-includes/js/jquery/jquery.minf43b.js" id="jquery-core-js">
+    <script src="./wwwroot/wp-includes/js/jquery/jquery.minf43b.js" id="jquery-core-js">
     </script>
 
-    <script src="wp-includes/js/jquery/jquery-migrate.min5589.js" id="jquery-migrate-js">
+    <script src="./wwwroot/wp-includes/js/jquery/jquery-migrate.min5589.js" id="jquery-migrate-js">
     </script>
 
-    <script src="wp-content/themes/js/jquery.min8a54.js" id="Jquery-js">
+    <script src="./wwwroot/wp-content/themes/js/jquery.min8a54.js" id="Jquery-js">
     </script>
 
     <link rel="https://api.w.org/" href="https://thiepdientu.com.vn/wp-json/">
@@ -975,13 +975,13 @@
         }
     </style>
 
-    <link rel="icon" href="wp-content/pic/favicon.png" sizes="32x32">
-    <link rel="icon" href="wp-content/pic/favicon.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="wp-content/pic/favicon.png">
+    <link rel="icon" href="./wwwroot/wp-content/pic/favicon.png" sizes="32x32">
+    <link rel="icon" href="./wwwroot/wp-content/pic/favicon.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="./wwwroot/wp-content/pic/favicon.png">
 
-    <meta name="msapplication-TileImage" content="wp-content/pic/favicon.png">
+    <meta name="msapplication-TileImage" content="./wwwroot/wp-content/pic/favicon.png">
 
-    <link rel="stylesheet" href="wp-content/themes/assets/style.css">
+    <link rel="stylesheet" href="./wwwroot/wp-content/themes/assets/style.css">
 
 
     <!-- Script để fix đường dẫn ảnh cho hosting -->
@@ -989,7 +989,171 @@
 
     <!-- Script auto scroll chậm (smooth slow motion) -->
     <script src="smooth-auto-scroll.js"></script>
+
+    <style>
+        .album-reveal-section { position: relative; }
+        .album-reveal-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            padding: 30px 20px 10px;
+        }
+        .album-reveal {
+            position: relative;
+            width: min(100%, 760px);
+            height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .album-reveal__card {
+            position: absolute;
+            width: clamp(190px, 24vw, 270px);
+            height: clamp(250px, 32vw, 360px);
+            border-radius: 22px;
+            overflow: hidden;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate3d(0, 32px, 0) scale(0.88) rotate(0deg);
+            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, box-shadow 0.45s ease;
+            will-change: transform;
+        }
+        .album-reveal__card.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .album-reveal__card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 16px;
+        }
+        .album-reveal__card.is-left {
+            z-index: 30;
+            transform: translate3d(-150px, 10px, 0) rotate(-8deg) scale(1);
+            transition-delay: 0.05s;
+        }
+        .album-reveal__card.is-middle {
+            z-index: 20;
+            transform: translate3d(0, 0, 0) rotate(6deg) scale(1);
+            transition-delay: 0.12s;
+        }
+        .album-reveal__card.is-right {
+            z-index: 10;
+            transform: translate3d(200px, 20px, 0) rotate(-6deg) scale(1);
+            transition-delay: 0.2s;
+        }
+        .album-reveal__card.is-left:hover {
+            transform: translate3d(-160px, 0, 0) rotate(1deg) scale(1.02);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
+        }
+        .album-reveal__card.is-middle:hover {
+            transform: translate3d(0, -10px, 0) rotate(0deg) scale(1.03);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
+        }
+        .album-reveal__card.is-right:hover {
+            transform: translate3d(200px, 10px, 0) rotate(3deg) scale(1.02);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.18);
+        }
+        .album-reveal__dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .album-reveal__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(0, 0, 0, 0.18);
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .album-reveal__dot.is-active {
+            width: 28px;
+            background: #b76e79;
+        }
+        @media (max-width: 767px) {
+            .album-reveal-wrap {
+                gap: 18px;
+                padding: 24px 12px 6px;
+                overflow: hidden;
+            }
+            .album-reveal {
+                width: 100%;
+                max-width: 340px;
+                height: 340px;
+                overflow: visible;
+            }
+            .album-reveal__card {
+                width: min(44vw, 170px);
+                height: min(58vw, 220px);
+                padding: 7px;
+                border-radius: 18px;
+            }
+            .album-reveal__card img {
+                border-radius: 12px;
+            }
+            .album-reveal__card.is-left {
+                transform: translate3d(-52px, 18px, 0) rotate(-8deg) scale(0.98);
+            }
+            .album-reveal__card.is-middle {
+                transform: translate3d(0, 0, 0) rotate(4deg) scale(1);
+            }
+            .album-reveal__card.is-right {
+                transform: translate3d(52px, 18px, 0) rotate(-5deg) scale(0.98);
+            }
+            .album-reveal__card.is-left:hover {
+                transform: translate3d(-58px, 10px, 0) rotate(-2deg) scale(1);
+            }
+            .album-reveal__card.is-middle:hover {
+                transform: translate3d(0, -6px, 0) rotate(0deg) scale(1.02);
+            }
+            .album-reveal__card.is-right:hover {
+                transform: translate3d(58px, 10px, 0) rotate(2deg) scale(1);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .album-reveal {
+                max-width: 300px;
+                height: 300px;
+            }
+            .album-reveal__card {
+                width: min(43vw, 150px);
+                height: min(57vw, 198px);
+                padding: 6px;
+            }
+            .album-reveal__card.is-left {
+                transform: translate3d(-44px, 14px, 0) rotate(-7deg) scale(0.98);
+            }
+            .album-reveal__card.is-middle {
+                transform: translate3d(0, 0, 0) rotate(3deg) scale(1);
+            }
+            .album-reveal__card.is-right {
+                transform: translate3d(44px, 14px, 0) rotate(-4deg) scale(0.98);
+            }
+            .album-reveal__card.is-left:hover {
+                transform: translate3d(-48px, 8px, 0) rotate(-2deg) scale(1);
+            }
+            .album-reveal__card.is-right:hover {
+                transform: translate3d(48px, 8px, 0) rotate(2deg) scale(1);
+            }
+        }
+    </style>
 </head>
+
 
 <body
     class="mau-thiep-template mau-thiep-template-templates mau-thiep-template-korea mau-thiep-template-templateskorea-php single single-mau-thiep postid-154 no-sidebar">
@@ -1079,7 +1243,7 @@
             left: -25px;
             width: 120px;
             height: 120px;
-            background-image: url('wp-content/pic/hoa.png');
+            background-image: url('./wwwroot/wp-content/pic/hoa.png');
             background-size: contain;
             background-repeat: no-repeat;
             opacity: 0.9;
@@ -1091,7 +1255,7 @@
             left: -5px;
             width: 120px;
             height: 120px;
-            background-image: url('wp-content/pic/hoa.png');
+            background-image: url('./wwwroot/wp-content/pic/hoa.png');
             background-size: contain;
             background-repeat: no-repeat;
             transform: rotate(45deg) scale(1, 1);
@@ -1104,7 +1268,7 @@
             right: -20px;
             width: 140px;
             height: 140px;
-            background-image: url('wp-content/pic/hoa1.png');
+            background-image: url('./wwwroot/wp-content/pic/hoa1.png');
             background-size: contain;
             background-repeat: no-repeat;
             opacity: 0.9;
@@ -1207,7 +1371,7 @@
                 /* Shadow chính */
                 0 30px 80px rgba(0, 0, 0, 0.1),
                 /* Shadow phụ xa hơn */
-                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 255, 0.3),
                 inset 0 -2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             display: flex;
@@ -1248,7 +1412,7 @@
                 0 15px 40px rgba(0, 0, 0, 0.25),
                 0 25px 70px rgba(0, 0, 0, 0.2),
                 0 35px 90px rgba(0, 0, 0, 0.12),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 255, 0.3),
                 inset 0 -2px 4px rgba(0, 0, 0, 0.1);
             animation: none;
             /* Pause bounce on hover */
@@ -1335,6 +1499,16 @@
             height: 100%;
             object-fit: cover;
             object-position: center top;
+            border-radius: 0;
+            transition: border-radius 0.45s ease, box-shadow 0.45s ease;
+        }
+
+        .envelope.opening .envelope-photo img {
+            border-top-left-radius: 28px;
+            border-top-right-radius: 28px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
         }
 
         .wax-seal-wrapper {
@@ -1518,11 +1692,11 @@
             <div class="envelope" id="envelope">
                 <div class="envelope-flap"></div>
                 <div class="wax-seal-wrapper" id="wax-seal">
-                    <img src="wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal">
+                    <img src="./wwwroot/wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal">
                 </div>
                 <!-- Ảnh trong phong bì -->
                 <div class="envelope-photo">
-                    <img src="wp-content/pic/wedding_invitation.jpg" alt="Couple Photo">
+                    <img src="./wwwroot/wp-content/pic/wedding_invitation.jpg" alt="Couple Photo">
                 </div>
             </div>
 
@@ -1597,7 +1771,7 @@
 
     <header>
         <section id="banner" class="bg_overlay">
-            <img data-src="wp-content/pic/wedding1.jpg" alt="" class="banner-bg img_bg banner_top lazyload"
+            <img data-src="./wwwroot/wp-content/pic/wedding1.jpg" alt="" class="banner-bg img_bg banner_top lazyload"
                 style="background-position:center center;">
 
             <div class="container">
@@ -1726,16 +1900,16 @@
                     Chúng tôi
                 </p>
                 <h2 class="section-title section-title-with-icons">
-                    <img src="wp-content/pic/codau.png" alt="Cô dâu" class="bride-groom-icon" loading="lazy">
+                    <img src="./wwwroot/wp-content/pic/codau.png" alt="Cô dâu" class="bride-groom-icon" loading="lazy">
                     <span>Cô dâu & Chú rể</span>
-                    <img src="wp-content/pic/chure.png" alt="Chú rể" class="bride-groom-icon" loading="lazy">
+                    <img src="./wwwroot/wp-content/pic/chure.png" alt="Chú rể" class="bride-groom-icon" loading="lazy">
                 </h2>
             </div>
 
             <div class="about-container">
                 <div class="about-card" style="order:1">
                     <div class="about-media">
-                        <img data-src="wp-content/pic/avatar_bride.jpg" alt="" class="bride_img lazyload">
+                        <img data-src="./wwwroot/wp-content/pic/avatar_bride.jpg" alt="" class="bride_img lazyload">
                     </div>
 
                     <div class="about-body" data-aos="fade-up" data-aos-duration="3000">
@@ -1751,7 +1925,7 @@
 
                 <div class="about-card" style="order:2">
                     <div class="about-media">
-                        <img data-src="wp-content/pic/avatar_groom.jpg" alt="" class="groom_img lazyload">
+                        <img data-src="./wwwroot/wp-content/pic/avatar_groom.jpg" alt="" class="groom_img lazyload">
                     </div>
 
                     <div class="about-body" data-aos="fade-up" data-aos-duration="3000">
@@ -1774,11 +1948,11 @@
         <div class="container">
             <div class="section-heading">
                 <h2 class="section-title section-title-with-icons">
-                    <img src="wp-content/pic/save_date.png" alt="Save the date">
+                    <img src="./wwwroot/wp-content/pic/save_date.png" alt="Save the date">
                 </h2>
             </div>
             <!-- COUNTDOWN -->
-            <div class="count-down section-countdown img_bg bg_overlay lazyload" data-bg="wp-content/pic/ring.jpg"
+            <div class="count-down section-countdown img_bg bg_overlay lazyload" data-bg="./wwwroot/wp-content/pic/ring.jpg"
                 style="background-image: none;">
                 <p class="subtitle">
                     Đếm ngược đến ngày trọng đại 💕
@@ -1829,9 +2003,9 @@
 
             <!-- Sweet Day Image and Text -->
             <div style="text-align: center; margin-top: 60px; margin-bottom: 40px;">
-                <img src="wp-content/pic/swee_day.png" alt="Sweet Day"
+                <img src="./wwwroot/wp-content/pic/swee_day.png" alt="Sweet Day"
                     style="max-width: 300px; width: 100%; height: auto;" class="lazyload"
-                    data-src="wp-content/pic/sweet_day.png">
+                    data-src="./wwwroot/wp-content/pic/sweet_day.png">
                 <p
                     style="font-size: 24px; color: rgb(0, 0, 0); font-family: var(--script-font); margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
                     Ngày vui đã chọn, trân trọng mời bạn
@@ -1856,7 +2030,7 @@
                 <div class="invitation">
                     <div class="invitation-container-box">
                         <div class="invitation-card">
-                            <img data-src="wp-content/pic/invitation_girl.png" alt="" class="lazyload">
+                            <img data-src="./wwwroot/wp-content/pic/invitation_girl.png" alt="" class="lazyload">
 
                             <h3 class="card-title uk-margin-remove">
                                 Tư Gia
@@ -1917,7 +2091,7 @@
                 <div class="invitation">
                     <div class="invitation-container-box">
                         <div class="invitation-card">
-                            <img data-src="wp-content/pic/invitation_boy.png" alt="" class="lazyload">
+                            <img data-src="./wwwroot/wp-content/pic/invitation_boy.png" alt="" class="lazyload">
 
                             <h3 class="card-title uk-margin-remove">
                                 Gold Palace
@@ -1992,8 +2166,8 @@
     </style>
 
     <section id="time-line" class="time-line-section img_bg bg_overlay lazyload"
-        data-bg="wp-content/pic/timeline_bg.jpg" style="background-image: none;">
-        <div class="time-line container">
+        data-bg="./wwwroot/wp-content/pic/timeline_bg.jpg" style="background-image: none;">
+        <div class="time-line container timeline-story-grid">
             <div class="section-heading">
                 <p class="subtitle">
                 </p>
@@ -2006,7 +2180,9 @@
             <div class="timeline-list">
                 <div class="timeline-item" data-aos="fade-up" data-aos-duration="400">
                     <div class="timeline-media">
-                        <img data-src="wp-content/pic/timeline1.jpg" alt="" class="timline-img lazyload">
+                        <a href="./wwwroot/wp-content/pic/timeline1.jpg" data-fancybox="timeline">
+                        <img src="./wwwroot/wp-content/pic/timeline1.jpg" data-src="./wwwroot/wp-content/pic/timeline1.jpg" alt="" class="timline-img lazyload">
+                        </a>
                     </div>
 
                     <div class="timeline-body">
@@ -2028,7 +2204,9 @@
 
                 <div class="timeline-item" data-aos="fade-up" data-aos-duration="400">
                     <div class="timeline-media">
-                        <img data-src="wp-content/pic/timeline2.jpg" alt="" class="timline-img lazyload">
+                        <a href="./wwwroot/wp-content/pic/timeline2.jpg" data-fancybox="timeline">
+                        <img src="./wwwroot/wp-content/pic/timeline2.jpg" data-src="./wwwroot/wp-content/pic/timeline2.jpg" alt="" class="timline-img lazyload">
+                        </a>
                     </div>
 
                     <div class="timeline-body">
@@ -2049,7 +2227,9 @@
 
                 <div class="timeline-item" data-aos="fade-up" data-aos-duration="400">
                     <div class="timeline-media">
-                        <img data-src="wp-content/pic/timeline3.jpg" alt="" class="timline-img lazyload">
+                        <a href="./wwwroot/wp-content/pic/timeline3.jpg" data-fancybox="timeline">
+                        <img src="./wwwroot/wp-content/pic/timeline3.jpg" data-src="./wwwroot/wp-content/pic/timeline3.jpg" alt="" class="timline-img lazyload">
+                        </a>
                     </div>
 
                     <div class="timeline-body">
@@ -2069,7 +2249,9 @@
 
                 <div class="timeline-item" data-aos="fade-up" data-aos-duration="400">
                     <div class="timeline-media">
-                        <img data-src="wp-content/pic/timeline5.jpg" alt="" class="timline-img lazyload">
+                        <a href="./wwwroot/wp-content/pic/timeline5.jpg" data-fancybox="timeline">
+                        <img src="./wwwroot/wp-content/pic/timeline5.jpg" data-src="./wwwroot/wp-content/pic/timeline5.jpg" alt="" class="timline-img lazyload">
+                        </a>
                     </div>
 
                     <div class="timeline-body">
@@ -2093,7 +2275,9 @@
 
                 <div class="timeline-item" data-aos="fade-up" data-aos-duration="400">
                     <div class="timeline-media">
-                        <img data-src="wp-content/pic/timeline6.jpg" alt="" class="timline-img lazyload">
+                        <a href="./wwwroot/wp-content/pic/timeline6.jpg" data-fancybox="timeline">
+                        <img src="./wwwroot/wp-content/pic/timeline6.jpg" data-src="./wwwroot/wp-content/pic/timeline6.jpg" alt="" class="timline-img lazyload">
+                        </a>
                     </div>
 
                     <div class="timeline-body">
@@ -2114,7 +2298,9 @@
 
                 <div class="timeline-item" data-aos="fade-up" data-aos-duration="400">
                     <div class="timeline-media">
-                        <img data-src="wp-content/pic/timeline7.jpg" alt="" class="timline-img lazyload">
+                        <a href="./wwwroot/wp-content/pic/timeline7.jpg" data-fancybox="timeline">
+                        <img src="./wwwroot/wp-content/pic/timeline7.jpg" data-src="./wwwroot/wp-content/pic/timeline7.jpg" alt="" class="timline-img lazyload">
+                        </a>
                     </div>
 
                     <div class="timeline-body">
@@ -2138,8 +2324,9 @@
     </section>
     <!-- END TIMELINE -->
 
-    <!-- ALBUM -->
-    <section id="album">
+    
+<!-- ALBUM -->
+    <section id="album" class="album-reveal-section">
         <div class="container">
             <p class="subtitle">
                 OUR SWEET MOMENTS
@@ -2150,70 +2337,38 @@
             </h2>
         </div>
 
-        <div class="album-slide">
-            <div class="swiper-wrapper album">
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album1.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album1.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
-
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album2.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album2.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
-
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album3.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album3.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
-
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album4.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album4.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
-
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album5.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album5.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
-
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album6.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album6.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
-
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album7.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album7.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
-
-                <div class="swiper-slide">
-                    <a href="wp-content/pic/album8.jpg" data-fancybox="gallery">
-                        <img data-src="wp-content/pic/album8.jpg" alt="" style="object-position:center;"
-                            class="lazyload">
-                    </a>
-                </div>
+        <div class="album-reveal-wrap">
+            <div class="album-reveal" aria-label="Album ảnh cưới dạng animation xếp chồng 3 ảnh">
+                <a href="./wwwroot/wp-content/pic/album1.jpg" data-fancybox="gallery" class="album-reveal__card is-active is-left">
+                    <img data-src="./wwwroot/wp-content/pic/album1.jpg" src="./wwwroot/wp-content/pic/album1.jpg" alt="Album 1" class="lazyload">
+                </a>
+                <a href="./wwwroot/wp-content/pic/album2.jpg" data-fancybox="gallery" class="album-reveal__card is-active is-middle">
+                    <img data-src="./wwwroot/wp-content/pic/album2.jpg" src="./wwwroot/wp-content/pic/album2.jpg" alt="Album 2" class="lazyload">
+                </a>
+                <a href="./wwwroot/wp-content/pic/album3.jpg" data-fancybox="gallery" class="album-reveal__card is-active is-right">
+                    <img data-src="./wwwroot/wp-content/pic/album3.jpg" src="./wwwroot/wp-content/pic/album3.jpg" alt="Album 3" class="lazyload">
+                </a>
+                <a href="./wwwroot/wp-content/pic/album4.jpg" data-fancybox="gallery" class="album-reveal__card">
+                    <img data-src="./wwwroot/wp-content/pic/album4.jpg" src="./wwwroot/wp-content/pic/album4.jpg" alt="Album 4" class="lazyload">
+                </a>
+                <a href="./wwwroot/wp-content/pic/album5.jpg" data-fancybox="gallery" class="album-reveal__card">
+                    <img data-src="./wwwroot/wp-content/pic/album5.jpg" src="./wwwroot/wp-content/pic/album5.jpg" alt="Album 5" class="lazyload">
+                </a>
+                <a href="./wwwroot/wp-content/pic/album6.jpg" data-fancybox="gallery" class="album-reveal__card">
+                    <img data-src="./wwwroot/wp-content/pic/album6.jpg" src="./wwwroot/wp-content/pic/album6.jpg" alt="Album 6" class="lazyload">
+                </a>
+                <a href="./wwwroot/wp-content/pic/album7.jpg" data-fancybox="gallery" class="album-reveal__card">
+                    <img data-src="./wwwroot/wp-content/pic/album7.jpg" src="./wwwroot/wp-content/pic/album7.jpg" alt="Album 7" class="lazyload">
+                </a>
+                <a href="./wwwroot/wp-content/pic/album8.jpg" data-fancybox="gallery" class="album-reveal__card">
+                    <img data-src="./wwwroot/wp-content/pic/album8.jpg" src="./wwwroot/wp-content/pic/album8.jpg" alt="Album 8" class="lazyload">
+                </a>
             </div>
-
-            <div class="swiper-pagination">
-            </div>
+            <div class="album-reveal__dots" aria-label="Chọn nhóm ảnh"></div>
         </div>
     </section>
     <!-- END ALBUM -->
+
 
     <!-- VIDEO -->
     <style>
@@ -2312,7 +2467,7 @@
 
             <div id="box-gift" style="padding: 0;">
                 <div class="gift-qr">
-                    <img data-src="wp-content/pic/qrcr.png" alt="" class="groom_qr lazyload" style="max-width:100%">
+                    <img data-src="./wwwroot/wp-content/pic/qrcr.png" alt="" class="groom_qr lazyload" style="max-width:100%">
                 </div>
             </div>
         </div>
@@ -2323,9 +2478,9 @@
     <!-- <section id="album">
         <div class="container">
                 <h2 class="section-title section-title-with-icons">
-                    <img src="wp-content/pic/codau.png" alt="Cô dâu" class="bride-groom-icon" loading="lazy">
+                    <img src="./wwwroot/wp-content/pic/codau.png" alt="Cô dâu" class="bride-groom-icon" loading="lazy">
                     <span>Bride and Groom</span>
-                    <img src="wp-content/pic/chure.png" alt="Chú rể" class="bride-groom-icon" loading="lazy">
+                    <img src="./wwwroot/wp-content/pic/chure.png" alt="Chú rể" class="bride-groom-icon" loading="lazy">
                 </h2>
         </div>
 
@@ -2469,7 +2624,7 @@
 
             <div class="video-list">
                 <div class="video-item">
-                    <img data-src="wp-content/pic/thiep.png" alt="" class="lazyload">
+                    <img data-src="./wwwroot/wp-content/pic/thiep.png" alt="" class="lazyload">
                 </div>
             </div>
         </div>
@@ -2480,12 +2635,12 @@
         <div class="uk-overlay uk-overlay-primary uk-position-cover">
         </div>
 
-        <img data-src="wp-content/pic/end.jpg" alt="" class="thankyou-bg lazyload" style="object-position:center;">
+        <img data-src="./wwwroot/wp-content/pic/end.jpg" alt="" class="thankyou-bg lazyload" style="object-position:center;">
 
         <div class="thankyou-body container uk-position-relative uk-position-z-index">
             <!-- Ảnh mylove với hiệu ứng lắc lư -->
             <div style="text-align: center; margin-bottom: 20px;">
-                <img src="wp-content/pic/mylove.png" alt="My Love"
+                <img src="./wwwroot/wp-content/pic/mylove.png" alt="My Love"
                     style="width: 150px; height: auto; animation: swing 3s ease-in-out infinite;">
             </div>
 
@@ -2514,7 +2669,7 @@
     </audio> -->
     <!-- AUDIO -->
     <!-- Sử dụng encodeURI cho tên file tiếng Việt: m%E1%BB%99t%20%C4%91%E1%BB%9Di.mp3 -->
-    <audio src="wp-content/pic/song.mp3" controls loop autoplay id="audio"></audio>
+    <audio src="./wwwroot/wp-content/pic/song.mp3" controls loop autoplay id="audio"></audio>
 
     <button class='toggleAudio'>
         <i class='ri-volume-up-fill'>
@@ -2546,10 +2701,10 @@
             "https://s3.ap-southeast-1.amazonaws.com/tynab.wedding/image/9667.webp",
             "https://s3.ap-southeast-1.amazonaws.com/tynab.wedding/image/8772.webp",
             //
-            "wp-content/pic/1.png",
-            "wp-content/pic/2.png",
-            "wp-content/pic/3.png",
-            "wp-content/pic/4.png",
+            "./wwwroot/wp-content/pic/1.png",
+            "./wwwroot/wp-content/pic/2.png",
+            "./wwwroot/wp-content/pic/3.png",
+            "./wwwroot/wp-content/pic/4.png",
             //
             "https://s3.ap-southeast-1.amazonaws.com/tynab.wedding/image/8430.webp",
             //
@@ -2846,19 +3001,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
         id="fancybox js-js">
         </script>
-    <script src="wp-content/themes/js/uikit.min8a54.js" id="uikit js-js">
+    <script src="./wwwroot/wp-content/themes/js/uikit.min8a54.js" id="uikit js-js">
     </script>
-    <script src="wp-content/themes/js/uikit-icons.min8a54.js" id="uikit icon-js">
+    <script src="./wwwroot/wp-content/themes/js/uikit-icons.min8a54.js" id="uikit icon-js">
     </script>
-    <script src="wp-content/themes/js/aos8a54.js" id="aos js-js">
+    <script src="./wwwroot/wp-content/themes/js/aos8a54.js" id="aos js-js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?ver=1.0.0" id="swiper slide-js">
     </script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js?ver=1.0.0" id="scrollrevea-js">
     </script>
-    <script src="wp-content/themes/js/main-wedding8a54.js" id="main wedding-js">
+    <script src="./wwwroot/wp-content/themes/js/main-wedding8a54.js" id="main wedding-js">
     </script>
-    <script src="wp-includes/js/comment-reply.min380f.js" id="comment-reply-js" async data-wp-strategy="async">
+    <script src="./wwwroot/wp-includes/js/comment-reply.min380f.js" id="comment-reply-js" async data-wp-strategy="async">
     </script>
 
     <!-- Backup Countdown if main script fails -->
@@ -2906,19 +3061,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
         id="fancybox js-js"></script>
-    <script src="wp-content/themes/js/uikit.min8a54.js" id="uikit js-js">
+    <script src="./wwwroot/wp-content/themes/js/uikit.min8a54.js" id="uikit js-js">
     </script>
-    <script src="wp-content/themes/js/uikit-icons.min8a54.js" id="uikit icon-js">
+    <script src="./wwwroot/wp-content/themes/js/uikit-icons.min8a54.js" id="uikit icon-js">
     </script>
-    <script src="wp-content/themes/js/aos8a54.js" id="aos js-js">
+    <script src="./wwwroot/wp-content/themes/js/aos8a54.js" id="aos js-js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?ver=1.0.0" id="swiper slide-js">
     </script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js?ver=1.0.0" id="scrollrevea-js">
     </script>
-    <script src="wp-content/themes/js/main-wedding8a54.js" id="main wedding-js">
+    <script src="./wwwroot/wp-content/themes/js/main-wedding8a54.js" id="main wedding-js">
     </script>
-    <script src="wp-includes/js/comment-reply.min380f.js" id="comment-reply-js" async data-wp-strategy="async">
+    <script src="./wwwroot/wp-includes/js/comment-reply.min380f.js" id="comment-reply-js" async data-wp-strategy="async">
     </script>
 
     <!-- Backup Countdown if main script fails -->
@@ -3074,19 +3229,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js?ver=1.0.0"
         id="fancybox js-js">
         </script>
-    <script src="wp-content/themes/js/uikit.min8a54.js" id="uikit js-js">
+    <script src="./wwwroot/wp-content/themes/js/uikit.min8a54.js" id="uikit js-js">
     </script>
-    <script src="wp-content/themes/js/uikit-icons.min8a54.js" id="uikit icon-js">
+    <script src="./wwwroot/wp-content/themes/js/uikit-icons.min8a54.js" id="uikit icon-js">
     </script>
-    <script src="wp-content/themes/js/aos8a54.js" id="aos js-js">
+    <script src="./wwwroot/wp-content/themes/js/aos8a54.js" id="aos js-js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js?ver=1.0.0" id="swiper slide-js">
     </script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js?ver=1.0.0" id="scrollrevea-js">
     </script>
-    <script src="wp-content/themes/js/main-wedding8a54.js" id="main wedding-js">
+    <script src="./wwwroot/wp-content/themes/js/main-wedding8a54.js" id="main wedding-js">
     </script>
-    <script src="wp-includes/js/comment-reply.min380f.js" id="comment-reply-js" async data-wp-strategy="async">
+    <script src="./wwwroot/wp-includes/js/comment-reply.min380f.js" id="comment-reply-js" async data-wp-strategy="async">
     </script>
 
     <!-- Backup Countdown if main script fails -->
@@ -3247,6 +3402,7 @@
         })();
     </script>
 
+    <script src="image-reveal-animation.js"></script>
 </body>
 
 </html>
