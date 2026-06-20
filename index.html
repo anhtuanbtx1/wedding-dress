@@ -5,6 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preload" href="./wwwroot/wp-content/pic/wedding_invitation.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="./wwwroot/wp-content/pic/wax-seal.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="./wwwroot/wp-content/pic/timeline_bg.jpg" as="image">
+
 
     <link rel='dns-prefetch' href='//cdn.jsdelivr.net'>
     <link rel='dns-prefetch' href='//unpkg.com'>
@@ -1692,11 +1696,11 @@
             <div class="envelope" id="envelope">
                 <div class="envelope-flap"></div>
                 <div class="wax-seal-wrapper" id="wax-seal">
-                    <img src="./wwwroot/wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal">
+                    <img src="./wwwroot/wp-content/pic/wax-seal.webp" alt="Wax Seal" class="wax-seal" fetchpriority="high" decoding="sync">
                 </div>
                 <!-- Ảnh trong phong bì -->
                 <div class="envelope-photo">
-                    <img src="./wwwroot/wp-content/pic/wedding_invitation.jpg" alt="Couple Photo">
+                    <img src="./wwwroot/wp-content/pic/wedding_invitation.jpg" alt="Couple Photo" fetchpriority="high" decoding="sync">
                 </div>
             </div>
 
