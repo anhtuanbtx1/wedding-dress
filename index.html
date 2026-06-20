@@ -28,7 +28,16 @@
             background: none !important;
             padding: 0 !important;
         }
-    </style>
+    
+        
+        
+        @keyframes sealPulse {
+            0% { transform: scale(1) rotate(0deg); }
+            35% { transform: scale(0.94) rotate(-2deg); }
+            70% { transform: scale(1.06) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+</style>
 
     <link rel='stylesheet' id='wp-block-library-css' href='./wwwroot/wp-includes/css/style.min380f.css' media='all'>
 
@@ -1152,6 +1161,66 @@
             }
         }
     </style>
+
+    <style>
+        </style>
+
+    
+
+    <style>
+        /* PERFECT ENVELOPE FIX */
+        
+        /* 1. Trạng thái ban đầu: Ảnh giấu hoàn toàn trong phong bì */
+        .envelope .envelope-photo {
+            transform: translateX(-50%) translateY(0) !important;
+            opacity: 0 !important; /* Ẩn ảnh đi */
+            z-index: 2 !important; /* Nằm dưới nắp phong bì */
+            pointer-events: none;
+        }
+
+        /* 2. Dấu sáp ban đầu: Nằm chính giữa, đè lên tất cả */
+        .envelope .wax-seal-wrapper {
+            z-index: 30 !important;
+            transform: translate(-50%, -50%) !important;
+        }
+
+        /* 3. Lớp phủ che phong bì (::before): Nằm trên ảnh, dưới dấu sáp */
+        .envelope::before {
+            z-index: 10 !important;
+            opacity: 1 !important;
+        }
+
+        /* 4. Trạng thái mở thiệp: Ảnh trồi lên */
+        .envelope.opening .envelope-photo {
+            transform: translateX(-50%) translateY(-65%) !important;
+            opacity: 1 !important; /* Hiện ảnh */
+            z-index: 20 !important; /* Trồi lên trên nắp phong bì đã mở */
+            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+        }
+
+        /* 5. Trạng thái mở thiệp: Dấu sáp đè lên ảnh, hơi dịch xuống dưới */
+        .envelope.opening .wax-seal-wrapper {
+            z-index: 40 !important; /* Đè lên ảnh đang trồi lên */
+            transform: translate(-50%, -20%) !important; /* Dịch lên một chút để bám theo ảnh đang nhô cao */
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* 6. Trạng thái mở thiệp: Lớp phủ che biến mất để nhường chỗ cho ảnh */
+        .envelope.opening::before {
+            opacity: 0 !important;
+        }
+
+        /* Responsive cho Mobile */
+        @media (max-width: 767px) {
+            .envelope.opening .envelope-photo {
+                transform: translateX(-50%) translateY(-60%) !important;
+            }
+            .envelope.opening .wax-seal-wrapper {
+                transform: translate(-50%, -15%) !important;
+            }
+        }
+    </style>
 </head>
 
 
@@ -1319,11 +1388,12 @@
                 /* Điều chỉnh vị trí đáy */
             }
 
-            .envelope.opening .envelope-photo {
-                transform: translateX(-50%) translateY(-35%);
-                /* Giảm mức trồi lên */
-                z-index: 10;
-            }
+            
+.envelope.opening .envelope-photo {
+    transform: translateX(-50%) translateY(-35%) !important;
+    z-index: 10 !important; /* Below seal */
+}
+
 
             .wax-seal-wrapper {
                 width: 60px;
@@ -1434,7 +1504,7 @@
 
         .envelope.opening::before {
             opacity: 0;
-            /* Ẩn lớp phủ khi mở */
+            z-index: 1;
         }
 
 
@@ -1487,12 +1557,12 @@
         }
 
         /* Khi mở envelope, ảnh nhô ra */
-        .envelope.opening .envelope-photo {
-            transform: translateX(-50%) translateY(-50%);
-            /* Trồi lên 50% */
-            z-index: 10;
-            /* Z-index cao nhất để không bị che */
-        }
+        
+.envelope.opening .envelope-photo {
+    transform: translateX(-50%) translateY(-35%) !important;
+    z-index: 10 !important; /* Below seal */
+}
+
 
         .envelope-photo img {
             width: 100%;
@@ -1518,9 +1588,9 @@
             transform: translate(-50%, -50%);
             width: 110px;
             height: 110px;
-            z-index: 20;
-            /* Tăng z-index để luôn nổi lên trên ảnh */
+            z-index: 30; /* Luôn trên ảnh */
             transition: all 0.4s ease;
+            pointer-events: none; /* Không block click */
         }
 
         .envelope:hover .wax-seal-wrapper {
@@ -1528,22 +1598,29 @@
         }
 
         .wax-seal {
+            opacity: 1 !important;
+            visibility: visible !important;
             width: 100%;
             height: 100%;
             filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
             animation: pulse 2.5s ease-in-out infinite;
         }
 
-        .wax-seal-wrapper.breaking .wax-seal {
-            animation: crack 0.7s ease-out forwards;
+        .wax-seal-wrapper.pressed .wax-seal {
+            opacity: 1 !important;
+            visibility: visible !important;
+            animation: sealPulse 0.45s ease-out;
         }
 
         /* Giữ wax-seal hiển thị khi envelope mở */
-        .envelope.opening .wax-seal-wrapper {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translate(-50%, -50%) !important;
-        }
+        
+.envelope.opening .wax-seal-wrapper {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 99 !important; /* Force top */
+}
+
 
         .invitation-text {
             text-align: center;
@@ -1625,11 +1702,12 @@
                 height: 80px;
             }
 
-            .envelope.opening .envelope-photo {
-                height: 300px;
-                width: 200px;
-                transform: translateX(-50%) translateY(-100px);
-            }
+            
+.envelope.opening .envelope-photo {
+    transform: translateX(-50%) translateY(-35%) !important;
+    z-index: 10 !important; /* Below seal */
+}
+
         }
 
         /* Invitation Cards Layout */
@@ -1719,7 +1797,7 @@
             envelope.addEventListener('click', () => {
 
                 // Vỡ con dấu
-                waxSeal.classList.add('breaking');
+                waxSeal.classList.add('pressed');
 
                 // Sau 0.7s mở phong bì và ảnh trồi lên
                 setTimeout(() => {
